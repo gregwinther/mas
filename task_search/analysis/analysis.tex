@@ -1,0 +1,35 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+
+\title{Search and Task Allocation \\
+    \small{Swarm Intelligence}}
+
+\author{Sebastian G. Winther-Larsen}
+
+
+\begin{document}
+    
+    \maketitle
+
+    \section{Formalism}
+
+    We define a search $A$ as an area bound by two points. Over the search area, 
+    $n_T$ tasks $T$ are spawned at random positions. The tasks have a task capacity
+    $T_c$ indicating how many agents $R$ are required to solve a task. The task is 
+    solved immeadeately if $T_c$ agents are within the task radius $T_r$.
+    The agents $R$ move randomly around the search area at a speed $R_v$. There are 
+    $n_R$ agents. When an agent is inside the task radius $T_r$ of a task, the agents 
+    will wat for other agents to complete the task. The agents can also call for 
+    aid in solving a task. The communication distance $R_d$ determines how 
+    far an agent can send a call for aid to another agent.
+    
+
+    \section{Simulations}
+
+    We implement a tool for visualising the problem described above, in `PyGame'.
+    The full implementation is available at \url{github.com/gregwinther/mas}.
+
+\end{document}
