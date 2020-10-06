@@ -31,16 +31,9 @@ class Task(pygame.sprite.Sprite):
     def __init__(self, x, y, Tc=1, Tr=50):
         super().__init__()
         radius = 5  # Size of task
-        # self.image = pygame.Surface([Tr*2]*2)
         self.image = pygame.Surface([radius * 2] * 2)
         self.image.fill(BACKGROUND)
         pygame.draw.circle(self.image, RED, (radius, radius), radius)
-        # pygame.draw.circle(
-        #     self.image, RED, (Tr, Tr), radius
-        # )
-        # pygame.draw.circle(
-        #     self.image, RED, (Tr, Tr), Tr, 1
-        # )
 
         self.pos = np.array([x, y])
         self.rect = self.image.get_rect()
@@ -48,17 +41,15 @@ class Task(pygame.sprite.Sprite):
 
         # Task capacity
         self.Tc = Tc
-        self.tasked_agents = 0
+        self.tasked_agents = pygame.sprite.Group()
 
         # Task radius
         self.Tr = Tr
 
     def update(self):
-        # x, y = self.pos
-        # self.rect.x = x
-        # self.rect.y = y
 
-        if self.tasked_agents >= self.Tc:
+        # Task completion
+        if len(self.tasked_agents) >= self.Tc:
             self.kill()
 
 
@@ -211,7 +202,7 @@ class Simulation:
                 for agent in self.agents:
                     agent.tasked = False
                     agent.called = False
-                self.tasked_agents.empty()
+                # self.tasked_agents.empty()
 
             # Checking if a task is found
             for agent in self.agents:
@@ -220,8 +211,7 @@ class Simulation:
                     if abs(distance) < task.Tr and not agent.tasked:
                         print(f"Aha! A task at {task.pos}")
                         agent.tasked = True
-                        self.tasked_agents.add(agent)
-                        task.tasked_agents += 1
+                        task.tasked_agents.add(agent)
 
             # Call out (and off)
             if self.communicate:
@@ -249,12 +239,13 @@ class Simulation:
 
 if __name__ == "__main__":
 
-    simulation = Simulation(900)
-    simulation.cycles = 810
-    # simulation.communicate = True
+    simulation = Simulation(1000)
+    simulation.cycles = 1000
+    simulation.communicate = True
     simulation.write = True
-    simulation.n_T = 5
+    simulation.n_T = 2
     simulation.Tr = 50
-    simulation.n_R = 10
-    simulation.Tc = 2
+    simulation.n_R = 7
+    simulation.Tc = 3
     simulation.start()
+
