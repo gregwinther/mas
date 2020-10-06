@@ -54,7 +54,7 @@ class Task(pygame.sprite.Sprite):
 
 
 class Agent(pygame.sprite.Sprite):
-    def __init__(self, x, y, Rv=25, boundary=1000):
+    def __init__(self, x, y, Rv=25, boundary=1000, Rd=250):
         super().__init__()
         radius = 5
         self.image = pygame.Surface([radius * 2] * 2)
@@ -66,7 +66,7 @@ class Agent(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = x, y
 
         self.Rv = Rv  # / FRAME_RATE
-        self.Rd = 250
+        self.Rd = Rd
 
         self.vel = np.random.rand(2) * 2 - 1
         self.trend = (np.random.rand(2) * 2 - 1) / 2
@@ -137,6 +137,7 @@ class Simulation:
         self.Tc = 1
         self.Tr = 50
         self.n_R = 1
+        self.Rd = 250
 
         self.replace_tasks = True
         self.communicate = False
@@ -171,7 +172,7 @@ class Simulation:
 
         for x, y in R_pos:
 
-            R = Agent(x, y)
+            R = Agent(x, y, Rd=self.Rd)
             self.agents.add(R)
 
         clock = pygame.time.Clock()
@@ -246,7 +247,8 @@ if __name__ == "__main__":
     simulation.write = True
     simulation.n_T = 2
     simulation.Tr = 50
-    simulation.n_R = 20
+    simulation.n_R = 5
+    simulation.Rd = 1000
     simulation.Tc = 3
     simulation.start()
 
