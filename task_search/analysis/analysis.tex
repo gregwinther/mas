@@ -27,6 +27,14 @@
     
     \maketitle
 
+    \section{Introduction}
+
+    Search and Task Allocation (STA) problems are considered a general class of 
+    problems in Multi-Agent Systems (MAS), and many real-world problems can 
+    be formulated as an STA problem~\cite{ijspeert2001collaboration}.
+    This is a study of reactive agents, where 
+    we investigate how the introduction of communication impacts performance.
+
     \section{Formalism}
 
     We define a search $A$ as an area bound by two points. Over the search area, 
@@ -37,7 +45,7 @@
     $n_R$ agents. When an agent is inside the task radius $T_r$ of a task, the agents 
     will wat for other agents to complete the task. The agents can also call for 
     aid in solving a task. The communication distance $R_d$ determines how 
-    far an agent can send a call for aid to another agent.
+    far an agent can send a call for aid from another agent.
 
     The position of the agents are updated in a discrete Langevinian manner,
     \begin{equation}
@@ -189,7 +197,7 @@
         \includegraphics[width=0.7\textwidth]{figures/Tc3_tasks_vs_R.png}
         \caption{
             Completed tasks vs number of agents with $T_c=3$, for two different 
-            task numbers $n_T \int \{1, 2\}$.
+            task numbers $n_T \in \{1, 2\}$.
         }
         \label{fig:Tc3_tasks_vs_R}
     \end{figure}
