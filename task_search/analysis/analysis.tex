@@ -235,14 +235,38 @@
 
     \section{Discussion}
 
-    For lower $n_R$ more simulations are needed. Higher relative error.
-    Simulations with $T_c=3$, some were especially non-interesting for low $n_R$.
-    Try to illustrate that $n_T = 2$ does not work well for $n_R = 5$ here. 
+    In order to improve upon the stability of the initial searching of the agents,
+    an improved pattern of movement could likely be devised. There are several
+    improvements one could make when introducing communications, for instance to make
+    the agents keep a distance to each other. There were several simualtions where many
+    agents bunched up together.
+    Another improvement with regards to communication 
+    is to make sure that only the needed agents are called when a task is found. However,
+    this would be a somewhat complicated alteration.
+    A simpler improvement, would be to alter the drift 
+    term of the agents over time in some clever way.
+    As it is now, it stays the same, except for when 
+    a boundary is reached. That said, it could be that a more deterministic movement 
+    pattern is better at finding tasks than the random movement employed herein.
+    
+    Looking more closely at \autoref{fig:some_vs_many}, we see larger error bars 
+    when there are fewer tasks.
+    Because of the reduced probability of encountering a task with lower $n_R/n_T$
+    ratio, the realtive uncertainty of these simulations are higher.
+    A further study into the 
+    necessity of either longer simulations or more simulations for a low 
+    number of agents, is therefore warranted. 
 
-    There are some sticky situations also in the call vs no call figure when $n_R=3$.
-
-    What would be better? Improve movement: To spread out in some pattern? Only call needed agents?
+    After the introduction of a task capacity, we encounter some ``sticky'' situations,
+    especially as $n_T T_c \to n_R$, or more extremely when $n_T T_c \geq n_R$. In these situations,
+    agents may find themselves waiting at a task until the end of the simulation, because 
+    every other agent is also wating at a task. This leads to the interesting observation in 
+    \autoref{fig:Tc3_tasks_vs_R} for $n_R=5$, where the performance is better for a lower number
+    of tasks, which reduces the risk of agents getting ``stuck''. This could likely be improved 
+    with a limited waiting time or the ability of an call-out from an agent to override a 
+    task-solving agent.
 
     \printbibliography
+
 
 \end{document}
