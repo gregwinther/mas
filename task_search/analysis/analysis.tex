@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{hyperref}
+\usepackage[toc,page]{appendix}
 
 \usepackage{amsmath}
 \usepackage{physics}
@@ -12,7 +13,7 @@
 \usepackage{subcaption}
 
 \usepackage{listings}
-\lstset{language=python}
+\lstset{language=python,basicstyle=\footnotesize\ttfamily}
 
 \usepackage[style=nature]{biblatex}
 \addbibresource{references.bib}
@@ -268,5 +269,13 @@
 
     \printbibliography
 
+    
+    \pagebreak
+
+    \appendix
+    \section{Code listing}
+
+    \lstinputlisting[firstline=0,lastline=236]{../pygame_task_search.py}
+    
 
 \end{document}
