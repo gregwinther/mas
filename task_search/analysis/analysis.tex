@@ -8,6 +8,8 @@
 \usepackage{physics}
 
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \usepackage{listings}
 \lstset{language=python}
@@ -83,11 +85,12 @@
     \begin{figure}
         \centering
         \includegraphics[width=0.8\textwidth]{figures/screenshot.png}
-        \caption{\label{fig:sample_screenshot}
+        \caption{
             Sample screenshot of a simulation with $n_T=3$ and $n_R=10$.
             The green dots are agents $R$, and the red 
             dots are tasks $T$. 
         }
+        \label{fig:sample_screenshot}
     \end{figure}
 
     The most important methods of the \lstinline!Task! and \lstinline!Agent!
@@ -115,14 +118,122 @@
     one(s) present, the agent will stay put until enough agents arrive at the 
     task to help. With the mechanic enabled, an agent may also be \emph{called}
     if it is within the communication distance $R_d$ of another agent. The agent 
-    will then move at speed towards the position of the signalling agent. All of the 
-    transitions between agent states are handled within the main game loop 
+    will then move at speed towards the position of the signalling agent. When the 
+    task is solved, the call will cease, in effect calling off any approaching agents.
+    All of the transitions between agent states are handled within the main game loop 
     of the \lstinline!Simulation! class.
 
     \section{Results}
 
+    All the simulations in this study is run five subsequent times in order to 
+    get better averaged values, for a total of 1000 time steps. All simulations 
+    also has the same task radius $T_r=50$.
+    \autoref{fig:some_vs_many} shows the results of two arbitrary chosen sets
+    of five simulations. The thin lines represent 
+    the individual simulations, while the bold lines are the averages. For 
+    both of these sets the number of tasks was $T_n=1$ with a task capacity $T_c=1$,
+    while the number of agents $n_R$ are five and 20. The figure is meant to give 
+    illustrate the necessity of repeated simulations in order to make 
+    results separable.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/some_vs_many.png}
+        \caption{
+            Illustration of arbitrary simulations, with cumulative number 
+            of solved tasks is plotted against the number of time steps.
+            The number of tasks $T_n$ is 1 and the number of agents
+            $R_n$ are 5 and 20. The task capacity $T_c$ was set to one.
+            No communication was allowed in these simulations.
+        }
+        \label{fig:some_vs_many}
+    \end{figure}
+
+    To benchmark the system we run a number of simulations for various number 
+    of tasks $T$ and number of agents $R$, with task capacity $T_c=1$. The 
+    results of these simualtions are shown in \autoref{fig:tasks_vs_R}.
+    The points indicate the average number of completed tasks at the end 
+    of a simulation, with standard deviation given by the error bar.
+    As expected, the number of completed tasks increase with the number 
+    of agents $R$ and with the number of tasks $T$.
+
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/low_T_tasks_vs_R.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/high_T_tasks_vs_R.png}
+        \end{subfigure}
+        \caption{
+            Completed tasks as a function of number of agents after 
+            1000 time steps. The number of agents and tasks are varied, 
+            while every other variable is held constant; $T_c=1$, $T_r=50$, 
+            no communication.
+        }
+        \label{fig:tasks_vs_R}
+    \end{figure}
+
+    The results of introducing a higher task capacipy is depicted in
+    \autoref{fig:Tc3_tasks_vs_R}. Here we set $T_c=3$, meaning that 
+    three agents is needed to complete a task $T$. This figure is 
+    comparable to the left-hand subfigure in \autoref{fig:tasks_vs_R}.
+    We see a notably lower number of completed tasks when a task 
+    capacity is introduced.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/Tc3_tasks_vs_R.png}
+        \caption{
+            Completed tasks vs number of agents with $T_c=3$, for two different 
+            task numbers $n_T \int \{1, 2\}$.
+        }
+        \label{fig:Tc3_tasks_vs_R}
+    \end{figure}
+
+    The results of introducing a call signal with reach $R_d=250$ can be 
+    seen in \autoref{fig:call_vs_no_call}. The average performance is 
+    markedly and significantly better when agents can call to others for help.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/call_vs_no_call.png} 
+        \caption{
+            The effect of introducing a calling signal with $R_d=250$ when an 
+            agent finds an agent finds a task. The number of tasks are $n_T=2$ 
+            with capacity $T_c=3$.
+        }
+        \label{fig:call_vs_no_call}
+    \end{figure}
+
+    \autoref{fig:louder_call} shows the effect of increasing the communication 
+    distance of the agents. The cumulative number of completed tasks is plotted 
+    against time. In the simulations, only the communication distance is varied,
+    $R \in \{250, 500, 1000\}$, all else equal ($T_c = 3$, $n_T=2$ and $n_R=5$).
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/louder_call.png}
+        \caption{
+            Averages of three sets of five simulations for different 
+            communication distances $R_d \in \{250, 500, 1000\}$,
+            with $T_c = 3$, $n_T=2$ and $n_R=5$.
+        }
+        \label{fig:louder_call}
+    \end{figure}
+
     \section{Discussion}
-    
+
+    For lower $n_R$ more simulations are needed. Higher relative error.
+    Simulations with $T_c=3$, some were especially non-interesting for low $n_R$.
+    Try to illustrate that $n_T = 2$ does not work well for $n_R = 5$ here. 
+
+    There are some sticky situations also in the call vs no call figure when $n_R=3$.
+
+    What would be better? Improve movement: To spread out in some pattern? Only call needed agents?
 
     \printbibliography
 
