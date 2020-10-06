@@ -5,6 +5,11 @@
 *.synctex.gz
 *.log
 *.out
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+
 
 # Mac directory file
 .DS_Store
