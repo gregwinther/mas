@@ -1,18 +1,6 @@
 import pygame, sys
 import numpy as np
 import math
-from datetime import datetime
-
-# Problem description
-# Search area is square b/w (0,0) and (1000,1000)
-
-# Some task T is randomly distributed over area,
-# when task is completed another is added.
-# Tc is the task capacity, indicating how many agents
-# are needed to solve the task.
-
-# An agent R move randomly around the area at
-# speed
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -59,7 +47,9 @@ class Agent(pygame.sprite.Sprite):
         radius = 5
         self.image = pygame.Surface([radius * 2] * 2)
         self.image.fill(BACKGROUND)
-        pygame.draw.circle(self.image, FOREST_GREEN, (radius, radius), radius)
+        pygame.draw.circle(
+            self.image, FOREST_GREEN, (radius, radius), radius
+        )
 
         self.pos = np.array([x, y], dtype=np.float64)
         self.rect = self.image.get_rect()
@@ -111,7 +101,8 @@ class Agent(pygame.sprite.Sprite):
 
     def dist_to_sprite(self, other_sprite):
         return math.hypot(
-            self.pos[0] - other_sprite.pos[0], self.pos[1] - other_sprite.pos[1]
+            self.pos[0] - other_sprite.pos[0],
+            self.pos[1] - other_sprite.pos[1],
         )
 
     def direction_to_sprite(self, other_sprite):
@@ -151,7 +142,8 @@ class Simulation:
 
         if self.write == True:
             f = open(
-                f"sta_T{self.n_T}_Tc{self.Tc}_Tr{self.Tr}_R{self.n_R}.txt", "w"
+                f"sta_T{self.n_T}_Tc{self.Tc}_Tr{self.Tr}_R{self.n_R}.txt",
+                "w",
             )
 
         pygame.init()
@@ -196,7 +188,9 @@ class Simulation:
             self.total_tasks_solved += n_new_tasks
             if n_new_tasks > 0:
                 print("Solved!")
-                R_pos = np.random.randint(0, self.WIDTH, size=(n_new_tasks, 2))
+                R_pos = np.random.randint(
+                    0, self.WIDTH, size=(n_new_tasks, 2)
+                )
                 for x, y in R_pos:
                     T = Task(x, y, Tc=self.Tc, Tr=50)
                     self.tasks.add(T)
@@ -225,7 +219,9 @@ class Simulation:
                         distance = agent.dist_to_sprite(agent2)
                         if abs(distance) < agent2.Rd:
                             agent2.called = True
-                            agent2.call_dir = agent2.direction_to_sprite(agent)
+                            agent2.call_dir = agent2.direction_to_sprite(
+                                agent
+                            )
 
             area.fill(BACKGROUND)
             self.tasks.draw(area)
@@ -244,11 +240,10 @@ if __name__ == "__main__":
     simulation = Simulation(1000)
     simulation.cycles = 1000
     simulation.communicate = True
+    # simulation.Rd = 1000
     simulation.write = True
     simulation.n_T = 2
     simulation.Tr = 50
-    simulation.n_R = 5
-    simulation.Rd = 1000
+    simulation.n_R = 20
     simulation.Tc = 3
     simulation.start()
-
