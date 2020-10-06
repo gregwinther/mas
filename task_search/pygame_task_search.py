@@ -202,7 +202,7 @@ class Simulation:
                 for agent in self.agents:
                     agent.tasked = False
                     agent.called = False
-                # self.tasked_agents.empty()
+                self.tasked_agents.empty()
 
             # Checking if a task is found
             for agent in self.agents:
@@ -212,6 +212,7 @@ class Simulation:
                         print(f"Aha! A task at {task.pos}")
                         agent.tasked = True
                         task.tasked_agents.add(agent)
+                        self.tasked_agents.add(agent)
 
             # Call out (and off)
             if self.communicate:
@@ -245,7 +246,7 @@ if __name__ == "__main__":
     simulation.write = True
     simulation.n_T = 2
     simulation.Tr = 50
-    simulation.n_R = 7
+    simulation.n_R = 20
     simulation.Tc = 3
     simulation.start()
 
