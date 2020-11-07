@@ -76,11 +76,15 @@ class Agent(pygame.sprite.Sprite):
         if self.called:
             # print(self.call_dir)
             self.pos += self.call_dir
-            self.rect.centerx, self.rect.centery = self.pos.copy().astype("int")
+            self.rect.centerx, self.rect.centery = self.pos.copy().astype(
+                "int"
+            )
             return
 
         self.pos += self.normalize(self.vel + self.trend, self.Rv)
-        self.rect.centerx, self.rect.centery = self.pos.copy().astype("int")
+        self.rect.centerx, self.rect.centery = self.pos.copy().astype(
+            "int"
+        )
 
         # Boundary conditions
         if self.pos[0] > self.boundary or self.pos[0] < 0:
@@ -114,6 +118,7 @@ class Agent(pygame.sprite.Sprite):
         vector /= np.linalg.norm(vector)
         return vector * renorm
 
+
 class Simulation:
     def __init__(self, width=1000):
         self.WIDTH = width  # Square
@@ -138,7 +143,6 @@ class Simulation:
 
         self.total_tasks_solved = 0
 
-
     def check_for_tasks(self):
         for agent in self.agents:
             for task in self.tasks:
@@ -159,11 +163,7 @@ class Simulation:
                     distance = agent.dist_to_sprite(agent2)
                     if abs(distance) < agent2.Rd:
                         agent2.called = True
-                        agent2.call_dir = agent2.direction_to_sprite(
-                            agent
-                        )
-
-
+                        agent2.call_dir = agent2.direction_to_sprite(agent)
 
     def start(self):
 
@@ -226,9 +226,8 @@ class Simulation:
                     agent.called = False
                 self.tasked_agents.empty()
 
-            
             # Checking if a task is found
-            self.check_for_tasks() 
+            self.check_for_tasks()
 
             area.fill(BACKGROUND)
             self.tasks.draw(area)
@@ -243,7 +242,6 @@ class Simulation:
 
 
 class AuctionSimulation(Simulation):
-
     def check_for_tasks(self):
         for agent in self.agents:
             for task in self.tasks:
@@ -266,16 +264,18 @@ class AuctionSimulation(Simulation):
                     if abs(distance) < agent2.Rd and not agent2.tasked:
                         agent_bids[distance] = agent2
 
-                ordered_bidding_agents = OrderedDict(sorted(agent_bids.items()))
-                
+                ordered_bidding_agents = OrderedDict(
+                    sorted(agent_bids.items())
+                )
+
                 i = 0
                 for bid in ordered_bidding_agents:
                     if i >= self.Tc - 1:
                         break
                     bidding_agent = ordered_bidding_agents[bid]
                     bidding_agent.called = True
-                    bidding_agent.call_dir = bidding_agent.direction_to_sprite(
-                        agent
+                    bidding_agent.call_dir = (
+                        bidding_agent.direction_to_sprite(agent)
                     )
                     i += 1
 
