@@ -113,7 +113,6 @@ class Agent(pygame.sprite.Sprite):
         vector /= np.linalg.norm(vector)
         return vector * renorm
 
-
 class Simulation:
     def __init__(self, width=1000):
         self.WIDTH = width  # Square
@@ -137,6 +136,33 @@ class Simulation:
         self.save_interval = 10
 
         self.total_tasks_solved = 0
+
+
+    def check_for_tasks(self):
+        for agent in self.agents:
+            for task in self.tasks:
+                distance = agent.dist_to_sprite(task)
+                if abs(distance) < task.Tr and not agent.tasked:
+                    print(f"Aha! A task at {task.pos}")
+                    agent.tasked = True
+                    task.tasked_agents.add(agent)
+                    self.tasked_agents.add(agent)
+
+        # Call out (and off)
+        if self.communicate:
+            for agent in self.tasked_agents:
+                # Make sure to not call oneself.
+                other_sprites = self.agents.copy()
+                other_sprites.remove(agent)
+                for agent2 in other_sprites:
+                    distance = agent.dist_to_sprite(agent2)
+                    if abs(distance) < agent2.Rd:
+                        agent2.called = True
+                        agent2.call_dir = agent2.direction_to_sprite(
+                            agent
+                        )
+
+
 
     def start(self):
 
@@ -199,29 +225,9 @@ class Simulation:
                     agent.called = False
                 self.tasked_agents.empty()
 
+            
             # Checking if a task is found
-            for agent in self.agents:
-                for task in self.tasks:
-                    distance = agent.dist_to_sprite(task)
-                    if abs(distance) < task.Tr and not agent.tasked:
-                        print(f"Aha! A task at {task.pos}")
-                        agent.tasked = True
-                        task.tasked_agents.add(agent)
-                        self.tasked_agents.add(agent)
-
-            # Call out (and off)
-            if self.communicate:
-                for agent in self.tasked_agents:
-                    # Make sure to not call oneself.
-                    other_sprites = self.agents.copy()
-                    other_sprites.remove(agent)
-                    for agent2 in other_sprites:
-                        distance = agent.dist_to_sprite(agent2)
-                        if abs(distance) < agent2.Rd:
-                            agent2.called = True
-                            agent2.call_dir = agent2.direction_to_sprite(
-                                agent
-                            )
+            self.check_for_tasks() 
 
             area.fill(BACKGROUND)
             self.tasks.draw(area)
