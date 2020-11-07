@@ -76,11 +76,11 @@ class Agent(pygame.sprite.Sprite):
         if self.called:
             # print(self.call_dir)
             self.pos += self.call_dir
-            self.rect.centerx, self.rect.centery = self.pos
+            self.rect.centerx, self.rect.centery = self.pos.copy().astype("int")
             return
 
         self.pos += self.normalize(self.vel + self.trend, self.Rv)
-        self.rect.centerx, self.rect.centery = self.pos
+        self.rect.centerx, self.rect.centery = self.pos.copy().astype("int")
 
         # Boundary conditions
         if self.pos[0] > self.boundary or self.pos[0] < 0:
