@@ -1,6 +1,7 @@
 import pygame, sys
 import numpy as np
 import math
+from collections import OrderedDict
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -241,15 +242,54 @@ class Simulation:
         pygame.quit()
 
 
+class AuctionSimulation(Simulation):
+
+    def check_for_tasks(self):
+        for agent in self.agents:
+            for task in self.tasks:
+                distance = agent.dist_to_sprite(task)
+                if abs(distance) < task.Tr and not agent.tasked:
+                    agent.tasked = True
+                    task.tasked_agents.add(agent)
+                    self.tasked_agents.add(agent)
+
+        # Call out (and off)
+        # Only the closes number of necessary agents
+        if self.communicate:
+            agent_bids = {}
+            for agent in self.tasked_agents:
+                # Make sure to not call oneself.
+                other_sprites = self.agents.copy()
+                other_sprites.remove(agent)
+                for agent2 in other_sprites:
+                    distance = agent.dist_to_sprite(agent2)
+                    if abs(distance) < agent2.Rd and not agent2.tasked:
+                        agent_bids[distance] = agent2
+
+                ordered_bidding_agents = OrderedDict(sorted(agent_bids.items()))
+                
+                i = 0
+                for bid in ordered_bidding_agents:
+                    if i >= self.Tc - 1:
+                        break
+                    bidding_agent = ordered_bidding_agents[bid]
+                    bidding_agent.called = True
+                    bidding_agent.call_dir = bidding_agent.direction_to_sprite(
+                        agent
+                    )
+                    i += 1
+
+
 if __name__ == "__main__":
 
-    simulation = Simulation(1000)
+    # simulation = Simulation(1000)
+    simulation = AuctionSimulation()
     simulation.cycles = 1000
     simulation.communicate = True
-    # simulation.Rd = 1000
-    simulation.write = True
+    simulation.Rd = 1000
+    # simulation.write = True
     simulation.n_T = 2
     simulation.Tr = 50
-    simulation.n_R = 20
+    simulation.n_R = 7
     simulation.Tc = 3
     simulation.start()
