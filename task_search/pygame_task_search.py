@@ -261,7 +261,7 @@ class AuctionSimulation(Simulation):
                 other_sprites.remove(agent)
                 for agent2 in other_sprites:
                     distance = agent.dist_to_sprite(agent2)
-                    if abs(distance) < agent2.Rd and not agent2.tasked:
+                    if abs(distance) < agent2.Rd:
                         agent_bids[distance] = agent2
 
                 ordered_bidding_agents = OrderedDict(
@@ -286,10 +286,10 @@ if __name__ == "__main__":
     simulation = AuctionSimulation()
     simulation.cycles = 1000
     simulation.communicate = True
-    simulation.Rd = 1000
-    # simulation.write = True
+    simulation.Rd = 1400
+    simulation.write = True
     simulation.n_T = 2
     simulation.Tr = 50
-    simulation.n_R = 7
+    simulation.n_R = 30
     simulation.Tc = 3
     simulation.start()
