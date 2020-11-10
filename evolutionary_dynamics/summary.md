@@ -315,8 +315,19 @@ A defector surrounded by 8 cooperators receives payoff 8b.
 Martin Nowak has studied such games extensively [@nowakSpatial].
 
 I have written a class in Python that can simulate such games, included in 
-an abridged form here: 
+an abridged form here. 
+Please find full code at https://github.com/gregwinther/mas, together with a nice animated gif. 
+The figures below show a few snapshots from a simulation with this script at 
+specific time points, for a simulation starting from a single defector, on an $N\times N$ lattice
+with $N=69$ and $b=1.61$.
 
+![Spatial PD for $b=1.61$, $N=69$ and $t=0$](./figures/fig_0.png){width=320px}
+![Spatial PD for $b=1.61$, $N=69$ and $t=20$](./figures/fig_20.png){width=320px}
+
+![Spatial PD for $b=1.61$, $N=69$ and $t=300$](./figures/fig_30.png){width=320px}
+![Spatial PD for $b=1.61$, $N=69$ and $t=50$](./figures/fig_50.png){width=320px}
+
+\pagebreak
 \small
 ```python
 class Board:
@@ -380,4 +391,5 @@ class Board:
 
         return best_dir
 ```
+\normalsize
 
