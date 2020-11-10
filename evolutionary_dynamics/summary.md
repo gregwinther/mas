@@ -251,11 +251,6 @@ $j$ is $w_{ij}$, i.e. the process is determinded by an $N \times N$ matrix $W$,
 where all entries are probabilities. The Moran process is given by the 
 _complete graph_ with identical weights.
 
-Other simple ones:
-
-- The (directed) cycle,
-- The line and the burst,
-
 The temperature of a vertex is given by,
 $$
     T_j = \sum_{i=1}^N w_{ij}.
@@ -266,16 +261,16 @@ equivalent to the Moran process. This is called the isothermal theorem.
 The cycle and directed cycles are isothermal. All symmeric graphcs 
 $w_{ij} = w_{ji}$ are isothermal.
 
-## Suppressing and Ampllifying Selection
-
-There are graphs that can do both these things. One-rooted 
-vs multiple-rooted graphs. (Super) star,funnnel
-
-## Games on Graphs
+Special graphs can both amplify and reduce selection. Amplifiers increase 
+the fixation probability of advantageous mutants and reduce the fixation 
+probability of disadvantageous mutants. Supressor graphs have 
+selection mechanics that function in the opposite manner.
 
 Games on graphs can be studied by assuming that individuals interact with their 
 nearest neighbors an thereby acumulate payoff. Some games are the birth-death, 
-death-birth and imitation process games.
+death-birth and imitation process games. A simple rule for evolution
+of cooperation on graphs is $b/c>k$; selection favours cooperation fi the 
+benefit-to-cost ratio exceeds the number of neighbors.
 
 # Spatial Games
 
