@@ -282,8 +282,8 @@ class AuctionSimulation(Simulation):
 
 if __name__ == "__main__":
 
-    # simulation = Simulation(1000)
-    simulation = AuctionSimulation()
+    simulation = Simulation(1000)
+    # simulation = AuctionSimulation()
     simulation.cycles = 1000
     simulation.communicate = True
     simulation.Rd = 1400
