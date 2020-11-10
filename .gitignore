@@ -10,6 +10,8 @@
 *.blg
 *.run.xml
 
+# Jupyter
+.ipynb_checkpoints
 
 # Mac directory file
 .DS_Store
