@@ -5,6 +5,24 @@ date: \today
 mainfont: DejaVuSerif.ttf
 geometry: margin=2cm
 fontsize: 16pt
+header-includes:
+    - \usepackage{setspace}
+references:
+    - type: article-journal
+      id: nowakSpatial
+      author:
+      - family: Nowak
+        given: M.
+      - family: May
+        given: R.
+      issued:
+        date-parts:
+        - - 1993
+      title: 'The spatial dilemmas of evolution'
+      container-title: World Scientific
+      volume: 3
+      issue: 01
+      page: 35-78
 ...
 
 # Quasispecies Theory
@@ -274,4 +292,92 @@ benefit-to-cost ratio exceeds the number of neighbors.
 
 # Spatial Games
 
-This is just pretty pictures.
+Evolutionary games can be studied in a spatial setting, where players interacting with
+their nearest neighbors. It is possible to formulate entirely deterministic spatial
+game dynamics. In spatial games, the theory of cellular automata meets game theory.
+Visualisation of spatial games make some pretty picures. In some parameter regions,
+we discover spatial chaos, dynamic fractals and evolutionary kaleidoscopes.
+
+An implementation of a spatial game is the spatial prisoner's
+dilemma, where the payoff matrix is a bit simplified (table \ref{tab:spatial_PD}).
+
+--- --- ---
+     C   D 
+ C   1   0  
+ D   b   0 
+--- --- ---
+
+:Spatial prisoner's dilemma payoff matrix. \label{tab:spatial_PD}
+
+Each individual has eight surrounding neighbors, for which a payoff is computed.
+A cooperator surrounded by 8 cooperators recieves payoff 8.
+A defector surrounded by 8 cooperators receives payoff 8b.
+Martin Nowak has studied such games extensively [@nowakSpatial].
+
+I have written a class in Python that can simulate such games, included in 
+an abridged form here: 
+
+\small
+```python
+class Board:
+
+    def __init__(self, N=2, b=1.5):
+        self.N = N
+        self.b = b
+        self.lattice = np.ones((N, N))
+        self.payoff_lattice = np.zeros((N, N))
+
+    def set_up_simple_square(self):
+        self.lattice = np.zeros((self.N, self.N))
+        self.lattice[self.N//2, self.N//2 - 1] = 1
+        self.lattice[self.N//2 - 1, self.N//2] = 1
+        self.lattice[self.N//2 - 1, self.N//2 - 1] = 1
+        self.lattice[self.N//2, self.N//2] = 1
+
+    def set_up_single_defector(self):
+        self.lattice = np.ones((self.N, self.N))
+        self.lattice[self.N//2, self.N//2] = 0
+
+    def advance(self):
+        old_strategies = self.lattice.copy()
+
+        self.compute_payoffs()
+        for i in range(self.N):
+            for j in range(self.N):
+                dir = self.dir_happiest_neighbor(i, j)
+                coords = self.move(dir, i, j)
+                # Change strategy if someone did better
+                if self.payoff_lattice[coords] > self.payoff_lattice[i, j]:
+                    self.lattice[i, j] = old_strategies[coords]
+
+    def set_up_random(self):
+        self.lattice = (np.random.rand(self.N, self.N) > 0.5).astype(int)
+
+    def compute_site_payoff(self, i, j):
+        
+        # Am I cooperating?
+        payoff_multiple = 1 if self.lattice[i, j] else self.b
+
+        payoff = 0
+
+        for dir in range(8):
+            payoff += self.lattice[self.move(dir, i, j)]
+
+        return payoff * payoff_multiple
+
+    def compute_payoffs(self):
+        for i in range(self.N):
+            for j in range(self.N):
+                self.payoff_lattice[i, j] = self.compute_site_payoff(i, j)
+
+    def dir_happiest_neighbor(self, i, j):
+        values = []
+
+        for dir in range(8):
+            values.append(self.payoff_lattice[self.move(dir, i, j)])
+
+        best_dir = np.asarray(values).argmax()
+
+        return best_dir
+```
+
