@@ -82,12 +82,75 @@
         reimplement this method, \lstinline|check_for_tasks()|. The entire implementation is 
         included in \autoref{app:code}.
 
+    \section{Results}
+
+        We perform five strategic agent simulations over $T=1000$ time steps for 
+        different communication distances $R_d\in\{0, 100, 200, 300, 400, 600, 1000, 1400\}$.
+        Figures showing cumulative number of tasks solved for these simulations are 
+        provided in \autoref{app:figs}.
+
+        A comparison of the strategic and reactive agents is shown in \autoref{fig:perf_compare}.
+        We uncover no significant difference in performance between the two types of 
+        agents for a low communication distance $R_d\leq600$. Above this level, the strategic
+        agents perform significantly better.
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{figures/perf_compare.png}
+            \caption{
+                Comparison of strategic and reactive agents. Each point represents 
+                the mean and standard deviation for number of solved tasks
+                after $T=1000$ times steps for 
+                five simulations. We notice a reduction in performance as the 
+                communication distance $R_d$ increases for the reactive agents.
+                \label{fig:perf_compare} 
+            }
+        \end{figure}
+
+
+    \section{Discussion}
+
+        The reason for the drop in performance for a long communication distance when 
+        one is applying reactive agents is illustrated clearly in \autoref{fig:reactive_clustering}.
+        When an agent discovers a task, a very large percentage of the other agents are called to its
+        location, if the commucation radius $R_d$ reaches across a large part of the search area. This 
+        in turn will sometimes result in clustering of agents, which again leads to a longer time until 
+        the next task is discovered.
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{figures/screenshot.png}
+            \caption{
+                Clustering of reactive agents that commonly occurs for high communication 
+                distances - this is for $R_d = 1400$.
+                \label{fig:reactive_clustering}
+            }
+        \end{figure}
+
+        Several factors must be taken into account in the choice of agents. We assume here that strategic agents 
+        are about twice as costly as reactive agents. The first thing to consider is what is known about the 
+        search area. If one has knowledge of the size of the search area $A$, one can tune the communication 
+        distance $R_d$ to be around half of the width of $A$, and reactive agents would perform just as well as 
+        strategic agents. If one does not have this knowledge, one would 
+        most likely be intersted in setting $R_d$ as high as possible, to make sure that agents can communicate at 
+        all. Such a decision bears the risk of making the reactive agents preform at a suboptimal level.
+        The difference in performance
+        as shown in \autoref{fig:perf_compare} is $~25$ solved tasks for $R_d>1000$ after $T=1000$ time 
+        steps. Since the cummulative number of solved tasks as a function of time appear to be linear,
+        one would expect this difference to increase over time. Therefore, the time it takes to complete 
+        the problem will affect the perfomance, favourably for strategic agents. After enough time, this 
+        difference would quickly make up the difference in cost of agents. In conclusion, if it is possible
+        to adjust the communication distance $R_d$ from prior knowledge of the search area $A$; use cheap,
+        reactive agents. If the search area is unknown, opting for more dear strategic agents set with 
+        very high $R_d$ is the prudent choice.
+
 \printbibliography
 
 \pagebreak
 \appendix
 
 \section{Figures}
+\label{app:figs}
 
 \begin{figure}[ht]
     \begin{subfigure}{.5\textwidth}
