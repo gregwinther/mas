@@ -321,11 +321,11 @@ The figures below show a few snapshots from a simulation with this script at
 specific time points, for a simulation starting from a single defector, on an $N\times N$ lattice
 with $N=69$ and $b=1.61$.
 
-![Spatial PD for $b=1.61$, $N=69$ and $t=0$](./figures/fig_0.png){width=320px}
-![Spatial PD for $b=1.61$, $N=69$ and $t=20$](./figures/fig_20.png){width=320px}
+![Spatial PD for $b=1.61$, $N=69$ and $t=0$](./figures/fig_0.png){width=330px}
+![Spatial PD for $b=1.61$, $N=69$ and $t=20$](./figures/fig_20.png){width=330px}
 
-![Spatial PD for $b=1.61$, $N=69$ and $t=300$](./figures/fig_30.png){width=320px}
-![Spatial PD for $b=1.61$, $N=69$ and $t=50$](./figures/fig_50.png){width=320px}
+![Spatial PD for $b=1.61$, $N=69$ and $t=300$](./figures/fig_30.png){width=330px}
+![Spatial PD for $b=1.61$, $N=69$ and $t=50$](./figures/fig_50.png){width=330px}
 
 \pagebreak
 \small
