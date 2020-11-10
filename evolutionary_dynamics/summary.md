@@ -70,7 +70,7 @@ with another.
 --- --- ---
 
 :Pay-off matrix with interacting strategies $A$ and $B$, with different 
-payoffs $a$, $b$, $c$ and $d$, dependent on choice.
+payoffs $a$, $b$, $c$ and $d$, dependent on choice. \label{payoff_matrix}
 
 In evolutionary games we interpret the payoffs as fitness - a better 
 strategy would lead to faster reproduction.
@@ -174,7 +174,6 @@ The Moran process is a birth-death process:
 Pick one individual for reproduction and one for death. 
 The offspring of the first individual replaces the second. The individual can 
 be the same. We typically have two types of individuals, A and B.
-Without mutation, 
 
 An interesting process to model is the one where the initial state is one A 
 individual and $N - 1$ B individuals. The probability that A takes over the 
@@ -190,16 +189,55 @@ as we could model a situation where the mutation is favoured.
 If the mutation rate is constant, then neutral mutations accumulate 
 at a constant rate, in effect introducing a "molecular clock".
 
-# Games in Finite Populations
+## Games in Finite Populations
 
+Extension of the Moran process provides a framework for studying
+evolutionary game dynamics for populations of a finite size.
 Computing fixation probabilities can determine if a selection one strategy 
-over another.
+over another. The payoff's of the game makes a contribution to the fitness 
+and therefore the selection. We differentiate between strong- and weak
+selection regimes.
 
-There is surprising $\frac{1}{3}$ law.
+Consider a standard payoff matrix in table \ref{payoff_matrix}.
+Natural selection would favour $A$ replacing $B$ if $b > c4 in a 
+sufficiently small population. Moreover, natural selection 
+favours $A$ replacing $B$ in a sufficiently large population, and 
+_weak_ selection, provided $a + 2b > c + 2d$.
 
-There are ESS that hold for finite population size $N$, i.e. ESS$_N$.
+Intensity of selection is implemented by introducing a parameter $w \in [0,1]$.
+The fitness of $A$ and $B$ is then given by
+$$
+    f_i = 1 - w + wF_i,
+$$
+and
+$$
+    g_i = 1 - w + wG_i,
+$$
+with $F_i$ and $G_i$ representing functions for the expected payoffs 
+for $A$ and $B$, respectively.
 
-Geme dynamics of TFT and ALLD changes for finite populations.
+There is a surprising $1/3$ law for evolutionary games in finite populations.
+If $A$ and $B$ are best counters to themselves, i.e. $a>c$ and $b< d$,
+The unstable equilibrium of the replicator equation is 
+$$
+    x^* = \frac{d - b}{a - b - c + d}.
+$$
+If $x^*< 1/3$ then the fixation probability is $\rho > 1/N$.
+In other words, a strategy has a fixation probability higher than $1/N$, 
+if it has a higher fitness at frequency $1/3#. This holds only for weak
+selection and a large population size.
+
+The traditional ESS and Nash equqilibria are neither necessary nor sufficient 
+to imply protection by selection in finite populations.
+There are special ESS that hold for finite population size $N$.
+Strategy $B$ is ESS$_N$ if
+
+1. Selection opposes $A$ invading $B$, $b(N-1) < c + d(N-2)$,
+2. Selection opposes $A$ replacing $B$, $a(N - 2) + b(2N - 1) < c(N + 1) + d(2N - 4)$
+
+Game dynamics change for finite populations. Natural selection can favor the replacement
+of ALLD by a cooperative strategy such as TFT, when starting from a 
+single individual using that strategy.
 
 # Evolutionary Graph Theory
 
