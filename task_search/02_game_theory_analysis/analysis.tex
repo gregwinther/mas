@@ -52,10 +52,10 @@
 
         Now, whenever a new task is discovered an auction takes place among the 
         agents within communication range. The discoverer of the task functions 
-        as the acutioneer, and the agents within communication distance as
+        as the auctioneer, and the agents within communication distance as
         bidders. The potentially helping bidders use the distance to the 
         task as their bid in the auction. The acutioneer will recruit help 
-        based on their bids in order to have enough agengs, including itself,
+        based on their bids in order to have enough agents, including itself,
         to solve the task.
 
     \section{Extending PyGame Framework}
@@ -67,7 +67,7 @@
         are the task capacity $T_c$ and an \lstinline|update()| method that kills the 
         task if enough agents, compared to $T_c$, are tasked to it. The \lstinline|Agent|
         class' most important functionality is the \lstinline|update()| method that 
-        functions differently depding on the \emph{state} of the agent. An agent can be 
+        functions differently depending on the \emph{state} of the agent. An agent can be 
         \emph{searching}, \emph{tasked} or \emph{called}. As such, it is a very passive 
         sprite. All other mechanics within the simulation is controlled by the 
         \lstinline|Simulation| class. Therefore, it is easiest from an implementation 
@@ -75,8 +75,8 @@
         agents strategic, because it is here that the states of the \lstinline|Agent| 
         class instances are changed.
 
-        To accomplish this, we move the lines of code that checks if a task is 
-        disovered, i.e. an agent is within task radius $T_r$ of the tasks, to a
+        To accomplish this extension, we move the subroutine that checks if a task is 
+        disovered, i.e. that an agent is within task radius $T_r$ of the tasks, to a
         separate method within the \lstinline|Simulation| class. Then we can 
         create a subclass \lstinline|AuctionSimulation| that only needs to 
         reimplement this method, \lstinline|check_for_tasks()|. The entire implementation is 
@@ -132,11 +132,11 @@
         search area. If one has knowledge of the size of the search area $A$, one can tune the communication 
         distance $R_d$ to be around half of the width of $A$, and reactive agents would perform just as well as 
         strategic agents. If one does not have this knowledge, one would 
-        most likely be intersted in setting $R_d$ as high as possible, to make sure that agents can communicate at 
+        most likely be interested in setting $R_d$ as high as possible, to make sure that agents can communicate at 
         all. Such a decision bears the risk of making the reactive agents preform at a suboptimal level.
         The difference in performance
         as shown in \autoref{fig:perf_compare} is $~25$ solved tasks for $R_d>1000$ after $T=1000$ time 
-        steps. Since the cummulative number of solved tasks as a function of time appear to be linear,
+        steps. Since the cumulative number of solved tasks as a function of time appear to be linear,
         one would expect this difference to increase over time. Therefore, the time it takes to complete 
         the problem will affect the perfomance, favourably for strategic agents. After enough time, this 
         difference would quickly make up the difference in cost of agents. In conclusion, if it is possible
