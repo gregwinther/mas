@@ -168,20 +168,27 @@ drift to ALLC.
 
 # Stochastic Description of Finite Populations
 
-The Moran process: Pick one individual for reproduction and one for death. 
+An imporant concept in stochastic theory describing populations 
+of finite size, is the Moran process.
+The Moran process is a birth-death process:
+Pick one individual for reproduction and one for death. 
 The offspring of the first individual replaces the second. The individual can 
 be the same. We typically have two types of individuals, A and B.
+Without mutation, 
 
 An interesting process to model is the one where the initial state is one A 
-individual and N - 1 B individuals. The probability that A takes over the 
-whole population is called the fixation probability. We are interesting in 
-studying if a mutation can take over the whole population.
+individual and $N - 1$ B individuals. The probability that A takes over the 
+whole population is called the fixation probability. This is interesting
+because it says something about the likelihood that 
+a mutation can take over the whole population.
 
-Introducing fitnes to this kind of model would make things more interesting,
+In a population of size $N$, a neutral mutant will reach fixation with 
+probability $1/N$. A mutant with realtive fitness $r$, will 
+reach fixation with probability $\rho = (1 - 1 / N) / (1 - 1/r^N)$.
+Introducing fitnes to this kind of model makes things more interesting,
 as we could model a situation where the mutation is favoured.
-
-One may also introduce random mutations, introducting the molecular clock of 
-neutral evolution.
+If the mutation rate is constant, then neutral mutations accumulate 
+at a constant rate, in effect introducing a "molecular clock".
 
 # Games in Finite Populations
 
