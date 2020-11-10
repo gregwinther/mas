@@ -5,6 +5,9 @@
 \usepackage{hyperref}
 \usepackage[toc,page]{appendix}
 
+\usepackage{graphicx}
+\usepackage{subcaption}
+
 % Default fixed font does not support bold face
 \DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
 \DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
@@ -82,8 +85,55 @@
 \printbibliography
 
 \pagebreak
-
 \appendix
+
+\section{Figures}
+
+\begin{figure}[ht]
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/Rd_0.png}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/Rd_100.png}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/Rd_200.png}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/Rd_300.png}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/Rd_400.png}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/Rd_600.png}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/Rd_1000.png}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/Rd_1400.png}
+    \end{subfigure}
+\end{figure}
+
+\pagebreak
 \section{Code listing}
 \label{app:code}
 
