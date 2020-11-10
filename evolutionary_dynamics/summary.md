@@ -319,7 +319,7 @@ an abridged form here.
 Please find full code at https://github.com/gregwinther/mas, together with a nice animated gif. 
 The figures below show a few snapshots from a simulation with this script at 
 specific time points, for a simulation starting from a single defector, on an $N\times N$ lattice
-with $N=69$ and $b=1.61$.
+with $N=69$, $b=1.61$ and periodic boundary conditions.
 
 ![Spatial PD for $b=1.61$, $N=69$ and $t=0$](./figures/fig_0.png){width=330px}
 ![Spatial PD for $b=1.61$, $N=69$ and $t=20$](./figures/fig_20.png){width=330px}
