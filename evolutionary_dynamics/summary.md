@@ -242,7 +242,7 @@ $$
 $$
 If $x^*< 1/3$ then the fixation probability is $\rho > 1/N$.
 In other words, a strategy has a fixation probability higher than $1/N$, 
-if it has a higher fitness at frequency $1/3#. This holds only for weak
+if it has a higher fitness at frequency $1/3$. This holds only for weak
 selection and a large population size.
 
 The traditional ESS and Nash equqilibria are neither necessary nor sufficient 
