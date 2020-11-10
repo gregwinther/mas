@@ -108,13 +108,13 @@ there can be dominance, coexistence, bistability or neutrality. For $n\geq 3$
 strategies, there can be heteroclinic cycles. For $n\geq 4$, there can be 
 limit cycles and chaos. The replicator equation with $n$ strategies
 $$
-    \dot{x}_i = x_i[\sum_{j=1}^n a_{ij}x_j - \phi(\mathbf{x})].
+    \dot{x}_i = x_i\left[\sum_{j=1}^n a_{ij}x_j - \phi(\mathbf{x})\right].
 $$
 is equivalent to the Lotka-Volterra equation from ecology,
 $$
     \dot{y}_i = y_i\left(r_i + \sum_{j=1}^{n-1} b_{ij}y_j  \right),
 $$
-with the parameters $r_i = a_{in} - a_{nn} and $b_{ij} = a_{ij} - a_{nj}$.
+with the parameters $r_i = a_{in} - a_{nn}$ and $b_{ij} = a_{ij} - a_{nj}$.
 
 
 # Prisoner's Dilemma and Cooperation
@@ -125,16 +125,46 @@ with the parameters $r_i = a_{in} - a_{nn} and $b_{ij} = a_{ij} - a_{nj}$.
  D   T   P 
 --- --- ---
 
-:A payoff matrix is a prisoner's dilemma game if $T>R>P>S$.
+:A payoff matrix depicts a prisoner's dilemma game if $T>R>P>S$.
 
 In a prisoner's dilemma game you can either cooperate (C) or defect (D).
 Defection is "rational", because it maximises the payoff. But, if 
 my opponent analyses the game the same way that I do, the we both
-choose defection which leads to a suboptimal payoff. The social 
+choose defection which leads to a suboptimal payoff. The social optium 
+does not provide the highest payoff for the individual. Thus, the 
+prisoner's dilemma captures the essence of cooperation and how defection 
+can dominate.
 
-Reactive strategies on the unit square.
+The repeated Prisoner's dilemme is a tool for studying direct reciprocity,
+which represents a mechanics for the evolution of cooperation. In a 
+series of "tournaments", Robert Axelrod invited participants to submit 
+strategies for a repeated game. The clear winner in these tournaments 
+was the simple Tit-for-Tat (TFT) statetegy. 
+TFT starts with a cooperation,
+then does whatever the oponent did the previous round. TFT has a couple 
+of weaknesses. 
 
-TFT vs ALLD $\rightarrow$ GTFT $\rightarrow$ WSLS.
+----- ------------------ -----------------
+       TFT                ALLD 
+ TFT   $\bar{m}R$         $S+(\bar{m}-1)P$ 
+ ALLD  $T+(\bar{m}-1)P$   $\bar{m}P$ 
+------ ----------------- ------------------
+
+:Tit-for-Tat (TFT) payoff against Always Defect (ALLD). The expected number of 
+rounds played is given by $\bar{m}$.
+
+TFT cannot prevent netutral drift leading to Always Cooperate
+(ALLC) and it cannot correct mistakes.
+
+An improvement on TFT is the Generous TFT (GTFT). This strategy 
+cooperate whenever the oponent has cooperated and sometimes even cooperates
+when the oponent has defected. It is therefore able to correct mistakes.
+
+In a repeadted PD game where one allow for evolution of reactive strategies,
+it is revealed that TFT is a catalyst for cooperation, but will be 
+replaced by GTFT. Both of these strategies are outcompeted by Win-stay,
+lose-shift (WSLS), which can correct mistakes and is stable against neutral 
+drift to ALLC.
 
 # Stochastic Description of Finite Populations
 
