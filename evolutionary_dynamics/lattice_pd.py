@@ -18,7 +18,6 @@ class Board:
     def __init__(self, N=2, b=1.5):
         self.N = N
         self.b = b
-        # self.lattice = np.empty((N, N), dtype=object)
         self.lattice = np.ones((N, N))
         self.payoff_lattice = np.zeros((N, N))
 
@@ -103,17 +102,17 @@ class Board:
             return ((i - 1) % self.N, (j - 1) % self.N)
 
 if __name__ == "__main__":
-    N = 50 
-    board = Board(N, 1.1)
+    N = 69
+    b = 1.61
+    board = Board(N, 1.61)
     # board.set_up_simple_square()
-    # board.set_up_single_defector()
-    board.set_up_random()
-    plt.figure() 
-    plt.imshow(board.lattice)
-    plt.title("1")
-    for i in tqdm(range(8)):
-        board.advance() 
+    board.set_up_single_defector()
+    # board.set_up_random()
+    for i in tqdm(range(500)):
         plt.figure()
         plt.imshow(board.lattice)
-        plt.title(f"{i + 1}")
-    plt.show()
+        plt.title(f"t = {i}")
+        plt.savefig(f"./figures/fig_{i}.png", dpi=100)
+        plt.close()
+        board.advance() 
+    # plt.show()
