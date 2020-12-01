@@ -4,6 +4,85 @@ author: Sebastian G. Winther-Larsen
 date: \today
 ...
 
+# 0: General concepts in multiagent systems
+
+## Agents
+
+An agent isa computer system capable of independent action 
+on behalf of its owner or user. Agents need skills and 
+abilities to cooperate, coordinate and negotiate with 
+each other on behalf of their users.
+
+We deal with two different kinds of agents,
+
+1. Reactive (or simple) agents can produce emergent properties 
+usually modelled by Swarm Intelligence (SI).
+2. Strategic (or intelligent) agents engage in social activities
+like cooperation, coordination, negotiation, etc usually
+described with Game Theory (GT)
+
+In some situations an agent-based solution would be appropriate.
+
+1. The environment is open, or at least highly dynamic,
+uncertain or complex. In these settings autonomous agents 
+might be the only solution.
+2. Agents are natural metaphors for
+socities, organisations and businesses, as well as intelligent 
+interfaces such as "expert assistants". 
+3. In istribution of data, control or expertise. When centralised 
+solutions are difficult, like synchronisation of many 
+autonomous databases.
+4. When dealing with legacy software, one can wrap the 
+legacy software in an agent layer.
+
+## Multiagents systems
+
+Multiagent systems consists of many agents interacting with 
+each other through some network or sensor system.
+
+Multiagent systems is an appropriate software paradigm 
+for modelling and building massive open and complex distributed
+systems. It is also a natural metaphor for artificial
+social systems. The research goal of multiagents systems 
+is to connect behaviour on the microscopic scale with (often)
+emergent properties and effects on the macroscopic scale.
+
+There are some key challenges associated with multiagent system
+desing.
+
+1. The agent design problem on the microscopic level. How do we
+build agents that are capable of independent, autonomous 
+action in order to successfully carry out tasks that we
+delegate to them?
+2. The social desgin problem on the macroscopic level.
+How do we build agents that are capable of intercating with other
+agents in order to successfully carry out the tasks that we delegate
+to them, especially when the agents do no share common goals 
+or intentions?
+
+A truly succesful multiagent system makes an explicit connection
+between the autonomous micro level agents and the macro level 
+modelling of the complex system.
+
+Mutliagent system applications can be divided into two groups,
+
+1. Distributed systems, where agents are processing nodes in a
+distributed multiagent system (emphasis on "multi").
+2. Personal software assistants, where individual agents act as
+proactive assistants to users (emphasis on "individual").
+
+## Swarm intelligence
+
+How would you define swarm intelligence?
+
+## Stigmergy
+
+What is stigmergy?
+
+## Emergence
+
+What do we mean by emergence in SI?
+
 # 9: Swarm Robotics 1
 
 ## What is swarm robotics?
