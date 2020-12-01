@@ -151,8 +151,52 @@ $$
 $$
 where $\dim \Phi = 1$. How does the update rule $h$ look like? Non-trivial!
 
+In swarm robotics we are still on the search for an appropriate general modelling
+technique.
+
 ## When are rate equations appropriate?
+
+Rate equations are appropriate when there is no special information 
+of interest in the full state of the system. We are 
+only interested in macroeconomics properties This is typically when
+we are working with concentrations, for example. Such systems are 
+typically inspired by chemical systems.
 
 ## The Langevin equation.
 
+$$
+    \dot{\mathbf{R}}(t)
+        = \mathbf{A}(\mathbf{R}(t), t) + B(\mathbf{R}(t), t)\mathbf{F}(t),
+$$
+where $\mathbf{R}$ is the position of an agent, $\mathbf{F}$ is a stochastic
+process (e.g. white noise), $\mathbf{A}$ describes and scales the agent's 
+behaviour and $B$ describes and scales non-deterministic behaviour.
+A possible choice for $\mathbf{A}$ is a gradient descent in a potential field,
+$$
+    \mathbf{A}(\mathbf{R}(t), t) = \nabla P (\mathbf{R}(t), t).
+$$
+
 ## The Focker-Planck equation.
+
+The \~ is a PDE describing the temporal dynamics of a probability density.
+This density describes in the original physical conetext the probability of 
+finding the particle within a certain area. It is the macroscopically 
+corresponding piece to the microscopic approach described by the Langevin
+equation. It was originannly used in physics for modelling Brownian motion
+with drift, describing diffusion processes in thermodynamics.
+
+So, it looks like this,
+$$
+    \frac{\partial \rho(\mathbf{r}, t)}{\partial t}
+        = \nabla (\mathbf{A}(\mathbf{r}, t)\rho(\mathbf{r}, t))
+        +  \frac{1}{2}Q\nabla^2(B^2(\mathbf{r}, t)\rho(\mathbf{r}, r)),
+$$
+where $\rho$ is a (probability) density for a single particle at position 
+$\mathbf{r}$ and time $t$. We interpret it as the robot density of all 
+coexisiting robots of the swarm. By integrating over an area $W$,
+$$
+    s(t) = \int_{\mathbf{r}\in W} \rho(\mathbf{r}, t),
+$$
+we get the expected fration for the swarm within that area at time $t$.
+The first term in the Fokker-Planck equation is a non-stochastic drift term 
+and the second term is a diffusion term.
