@@ -92,7 +92,64 @@ It is possible for a system-wide deadlock to occur in a swarm robotics system.
 For instance with a very high swarm denisty, such that all robots permanently try 
 to avoid collisons resulting in zero performance.
 
-## Modelling swarms as a series of mappings.
+## Modelling swarms (as a series of mappings).
+
+A swarm system of size $N$ in 2D space can be described by the state vecotr,
+$$
+    \gamma = (r_1, r_2, \dots, r_N, v_1, v_2, \dots, v_N, s_1, s_2, \dots, s_N),
+$$
+wher $r_i$ are the positions, $v_i$ are the velocities and $s_i$ are the discrete states 
+for agents $i \in [1, N]$. We denote the configuration space by $\Gamma$, i.e.
+$\gamma \in \Gamma$, with $\dim \Gamma = 2N + 2N + N = 5N$.
+
+This is a large space to keep track off, and we can only observe one sequence,
+$\gamma_t, \gamma_{t+1}, \gamma_{t+2}, \dots$ at a time for a specific 
+initial state $\gamma_0$. What we ideally need instead is to understand how the
+system operates in gemeral for any setup. We need to omit certain parts, s.t. 
+we obtain a different definition of a configuration, $\phi \in \Phi$ with 
+$\dim \Phi << \dim \Gamma$. We seek a mapping,
+$$
+    f: \Gamma \mapsto \Phi.
+$$
+In a discrete time model, we also need two update rules, $g: \Gamma \mapsto \Gamma$
+and $h: \Phi \mapsto \Phi$. We now have the following functionality,
+$$
+    f(\gamma_t) = \phi_t, \ 
+    g(\gamma_t) = \gamma_{t + 1}, \
+    h(\phi_t) = \phi_{t + 1}.
+$$
+The following requirement should hold (we want this),
+$$
+    h(f(\gamma_t)) = f(g(\gamma_t)),
+$$
+that is, the modelling abstractions implemented by $f$ should be chosen 
+carefulle sucht that the model update rule $h$ is able to predict 
+the correct model configuration for the next time step.
+
+We would also like an inverse map $f^{-1}: \Phi \mapsto \Gamma$ that 
+reverses the model abstractions and rebuilds the configuration $\gamma$
+of the real system from the model configuration $\phi$. However,
+typically $f^{-1}$ cannot usefully be defined, because $f$ is surjective,
+that is, we can have $\gamma_1, \gamma_2 \in \Gamma$ with $\gamma_1 \neq \gamma_2$
+and $f(\gamma_1) = f(\gamma_2)$ due to the reduction in dimensionality caused
+by $f$.
+
+Why do we need models in Swarm Robotics? Quote from Schweitzer:
+
+> To gain insight into the interplay between microscopic interactions and 
+> macroscopicfeatures, it is important to find a level of description that,
+> on the one hand, considers specificfeatures of the system and is suitable
+> for reflecting the origination of new qualities, but, onthe other hand,
+> is not flooded with microscopic details. (...) A commonly accepted theory of
+> agent systems that also allows analytical investigations is, however,
+> still pending because of the diversity of the various models invented for
+> particular applications.
+
+An extreme example of an extreme model abstraction,
+$$
+    f(\gamma) = \frac{|\{s_i|s_i=A\}|}{N} = \phi,
+$$
+where $\dim \Phi = 1$. How does the update rule $h$ look like? Non-trivial!
 
 ## When are rate equations appropriate?
 
