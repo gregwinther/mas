@@ -8,6 +8,8 @@ date: \today
 
 ## What is swarm robotics?
 
+Quick answer: swarm intelligence applied to robotics.
+
 There is no explicit definition of a _swarm_ in literature.
 A swarm is defined via its behavior.
 
@@ -37,10 +39,58 @@ swarms.
 Collaboration is required to go beyond a mere 
 paralllisation in swarm a swarm system. We want 
 to go beyond the performance of simple parallelisation.
-Think of some a clearning task with each robot 
+Think of some clearning task with each robot 
 cleaning a small assigned area.
 
 ## Swarm performance.
+
+Some keywords are _contention_  or _inference_ and (lack of) _coherency_,
+given by parameters $\alpha$ and $\beta$, repectively. The robots need 
+to share limited resources and communicate. This is difficult.
+
+In the contexst of swarm robotics we can interpret contention as interference 
+between robots due to shared resouces, such as an entrance to a base station
+or generally space. Collision avoidance is a waiting loop because the shared 
+resource _space_ is currently not available. This can be compared to an 
+airplane flying in a holding pattern because the resource "runway" is 
+currently in use and should certainly not be shared. Incoherency, in turn,
+can be interpreted as inconsistencies or overhead due to limited communication
+of imformation or due to imperfect synchrony.
+
+The univeral scalability law is important,
+$$
+    R(N) = \frac{N}{1 + \alpha(N - 1) + \beta N (N - 1)}.
+$$
+Its inverntor, Gunther, identifies four qualitatively different
+situations,
+
+1. If contention and lack of coherency are negligible, then we get
+"equal bang for the buck" and have a linear speedup ($\alpha = 0$, $\beta=0$),
+2. If there is a cost for sharing resources in the form of contention, then 
+we have a sublinear speedup ($\alpha > 0$, $\beta = 0$),
+3. If ther is an increased negative influence due to contention, then the 
+speedup clearly levels off ($\alpha >> 0$, $\beta = 0$).
+4. If in additon there is also an increased influence of incoherence, then
+there exists a peak speed up and for bigger system sizes the speedup decreases
+($\alpha >> 0$, $\beta > 0$).
+
+![Gunther's Universal law of Computational Scalability](figures/gunther_usl.png)
+
+One can identify some "regions" of performance; super-linear, sub-linear,
+optimal and inference. As more agents are added, performance starts 
+to increase (sub-/super-)linearly, then we get to an optimum after a while.
+After that comes the inference region.
+
+In parallel computing, superlinear speedups can occur due to some interplay between 
+problem size per computing unit and available memory. For example, if the 
+problem can be divied into pieces that fit completely into a CPUs cache, then 
+one can observe a considerable speedup. In swarm robotics, superlinear performance 
+increases occur due to qualitatively different collaboration modes that are accessible
+with increasing swarm size as seen in bucket brigades.
+
+It is possible for a system-wide deadlock to occur in a swarm robotics system.
+For instance with a very high swarm denisty, such that all robots permanently try 
+to avoid collisons resulting in zero performance.
 
 ## Modelling swarms as a series of mappings.
 
