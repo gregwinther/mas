@@ -8,7 +8,12 @@ date: \today
 
 ## Agents
 
-An agent isa computer system capable of independent action 
+Definition from Woolridge: "An agent is a computer 
+system that is situated in some environment,
+and that is capable of autonomous action in this 
+environment in order to meet its delegated objectives."
+
+An agent is a computer system capable of independent action 
 on behalf of its owner or user. Agents need skills and 
 abilities to cooperate, coordinate and negotiate with 
 each other on behalf of their users.
@@ -16,10 +21,12 @@ each other on behalf of their users.
 We deal with two different kinds of agents,
 
 1. Reactive (or simple) agents can produce emergent properties 
-usually modelled by Swarm Intelligence (SI).
+usually modelled by Swarm Intelligence (SI). These can produce 
+complex collective properties/performance.
 2. Strategic (or intelligent) agents engage in social activities
 like cooperation, coordination, negotiation, etc usually
-described with Game Theory (GT)
+described with Game Theory (GT). These engage in strategic
+interaction.
 
 In some situations an agent-based solution would be appropriate.
 
@@ -38,7 +45,9 @@ legacy software in an agent layer.
 ## Multiagents systems
 
 Multiagent systems consists of many agents interacting with 
-each other through some network or sensor system.
+each other through some network or sensor system. Definition
+from Woolridge: "Multiagent systems are systems of 
+multiple interacting computing elements known as agents."
 
 Multiagent systems is an appropriate software paradigm 
 for modelling and building massive open and complex distributed
@@ -73,15 +82,31 @@ proactive assistants to users (emphasis on "individual").
 
 ## Swarm intelligence
 
-How would you define swarm intelligence?
+Swarm Intelligence (SI) is the emergent collective intelligence 
+of groups of simple agents, typically based on the social insect metaphor.
+This differs from Game Theory where agents are modellled as engaging in
+strategic interaction, typically inspired by utility-based models in the 
+social sciences.
+
+In terms of multiagents systems (MAS) there are some key similarities between
+the two paradigms. Both SI and GT model autonomous agents, which is 
+the only requirement in MAS, and both SI and GT employ distributedness, i.e.
+there is no central control. These two points are actually the same. 
+Some key differences are that SI use simple, reactive agents vs strategic,
+proactive, social agents in GT.
+
+Emergence and stigmergy are two properties that are unique to SI.
 
 ## Stigmergy
 
-What is stigmergy?
+Stigmergy is indirect, non-symbolic interaction mediated by the environment.
+Agents can use stigmergy to excange information by modifying the 
+environment. This concet does not exist in game theoretical framework,
+because one assumes direct communication between agents.
 
 ## Emergence
 
-What do we mean by emergence in SI?
+Emergence is an important in SI. 
 
 # 9: Swarm Robotics 1
 
