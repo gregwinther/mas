@@ -265,6 +265,12 @@ $$
 The agents $i$ and $j$ will value these outcomes according to their utility functions,
 $u_i$ and $u_j$.
 
+An interaction is said to be strictly competitive between agent $i$
+and agent $j$ when
+$$
+    \omega \succ_i \omega' \land \omega' \succ_j \omega.
+$$
+
 ------- ------------------- ------------------
 i \\ j   D                   C
 D       $u_{i4}$, $u_{j4}$  $u_{i3}$, $u_{j3}$
@@ -274,11 +280,6 @@ C       $u_{i2}$, $u_{j2}$  $u_{i1}$, $u_{j1}$
 :Payoff matrix. This is a game on strategic (or normal) form.
 The extensive form would be a game tree.
 
-An interaction is said to be strictly competitive between agent $i$
-and agent $j$ when
-$$
-    \omega \succ_i \omega' \land \omega' \succ_j \omega.
-$$
 
 ## Solution concepts for simple games
 
