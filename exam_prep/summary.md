@@ -108,6 +108,287 @@ because one assumes direct communication between agents.
 
 Emergence is an important in SI. 
 
+# 1: Non-cooperative game theory
+
+## Different types of games
+
+REMEMBER TO LOOK THROUGH A FEW EXAMPLES,
+including payoff matrices before exam.
+
+### Cooperative / non-cooperative
+
+A game is _cooperative_ if the players are able to form binding commitments
+that are externally enforced. This external force can stem from contractual 
+law or a some government. A game is _non-cooperative_ if players cannot form
+or if all agreemetns need to be self-enforcing, e.g. through credible threats.
+
+### Symmetric / asymmetric
+
+A symmetric game is a game where the payoffs for playing a particular 
+strategy depend only in the other strategies employed, not on who
+is playing them. If the identities of the players can be changed without
+changing the payoff to the strategies, the game is symmetric. 
+Chicken, Prisoner's Dilemma and Stag Hunt are all symmetric games.
+
+The most commonly studied asyummetric games are games where there are not
+identical strategy sets for both players. For instance, the Ultimatum Game 
+and the Dictator Game have different strategies for each player. It is 
+possible for a game to have identical stratgies for both (all) players,
+yet be asymmetric.
+
+### Zero-sum games
+
+Zero-sum games are a special case of constant-sum games in which choices by
+players can neither increase nor decrease the available resources.
+In zero-sum games, the total benefit to all players in the game, for 
+every combination of strategies, always adds to zero. One can say that a
+player only benefits at equal expense of others.
+
+Matching Pennies, poker and chess are all zero-sum games. Many games 
+studied (like Prisoner's Dilemma), are not zero-sum games because  the outcome
+has net results greater or less than zero.
+
+Constant-sum games correspond to activities like theft and gambling, but not to
+the fundamental economic situation in which there are potential gains from trade.
+It is possible to transform any game in to (possibly asymmetric) zero-sum game 
+by adding a dummy player whose losses compensate the players' net winnings.
+
+### Simultaneous / sequential
+
+_Simultaneous_ games are games where both (all) players move simultaneously, or 
+at least unaware of the other player(s)' earlier action. _Sequential_ games
+or dynamic games, are games where players ahev some knowledge about earlier
+actions. 
+
+### Evolutionary game theory
+
+Evolutionary game theory studies players who adjust their strategies over time
+according to rules that are not necessarily rational or farsighted. The fitness
+of individuals is not constant in evolutionary games, but depends on relative
+proportions or frequencies of the different phenotypes in the population.
+
+The evolution of strategies over time is typically modelled as a Markov chain
+with a state variable such as the current strategy profile or how the game 
+has been palyed in the recent past.
+
+### Behavioural game theory
+
+Behavioural game theory analyzes interactive strategic decisions and behaviour using 
+methods of game theory, experimental economics and experimental psychology. 
+Experiments include testing deviations from typical simplifications of economic 
+theory such as the independence axiom and neglect altruism, fairness and framing 
+effects.
+
+## Self-interested agents
+
+Agents have their own desires, preferences and beliefs. They 
+seek to maximise their expected utility,
+$$
+    Ag_\text{opt} = \max \sum u(r) P(r|Ag, Env),
+$$
+where $r$ is a "run". Whatever that means. This equation comes 
+from the Tileworld example.
+
+What is more, agent beliefs are modelled by information processes.
+
+There is talk about a set of outcomes that an agent can experience,
+$$
+    \Omega = \{\omega_1, \omega_2, \dots\}.
+$$
+
+## Utility
+
+The utility of an agent is a valuable associated with an outcome,
+$$
+    u_i: \Omega \to \mathbb{R}
+$$
+where $u_i$ is the utility of agent $i$, $\Omega$ is the set of possible 
+outcomes, $\mathbb{R}$ is the set of real numbers.
+
+Utility function is a way of representing an agent's preferences. Utility does
+not directly equate to money, but it helps to think of money.
+The utility value fo money is typically diminishing. An increase in utility 
+from \$0 to \$1m is much greater than from \$500m to \$500m. You can make an
+inverse argument regarding debt.
+
+Agents are able to rank outcomes by applying their utility function,
+$$
+    u_i(\omega_k) \geq u_i(\omega_l) \iff w_k \succeq_i w_l
+$$
+means that agent $i$ prefers outcome $\omega_k$ to $\omega_l$, or 
+is indefferent, whil
+$$
+    u_i(\omega_k) > u_i(\omega_l) \iff w_k \succ_i w_l,
+$$
+means that agent $i$ strictly prefers outcome $\omega_k$
+$\omega_l$.
+
+Here are some important properties of preference ordering.
+
+1. Reflexivity: $\omega \succeq_i \omega$ $\forall \omega \in \Omega$
+2. Transivity: $\omega_k \succeq_i \omega_l,\ \omega_l \succeq_i \omega_m \implies \omega_k \succeq_i \omega_m$
+3. Comparability:
+Either $\omega_k \succeq_i \omega_l$ or $\omega_l \succeq_i \omega_k$ $\forall \omega \in \Omega$.
+
+## Strategic interaction
+
+The environment is altered in simultaneous actions by agents.
+The basic idea of strategic interaction:
+
+> What I do depends on what you do, and what you do depends on what I do, which 
+> we should both have taken into account in the first place.
+
+One can assume that agents must act and that agents can not see other 
+agents perform actions, in the scope of this course.
+
+Mathematically we can write,
+$$
+    \tau: Ac_i \times Ac_j \to \Omega,
+$$
+where $\tau$ is the state transformer function, $Ac_i$ is the action of 
+agent $i$ and $\Omega$ is the set of outcomes.
+
+The simplest strategic game conceivalbe consists of two agents, $i$ and $j$,
+with two actions available, Cooperate ($C$) or Defect ($D$). This gives us 
+four different combinations of actions,
+$$
+    (C,C)\lor(C,D)\lor(D,C)\lor(D,D)
+$$
+with four different outcomes,
+$$
+   \tau(C, C)=\omega_1,\ \tau(C, D)=\omega_2,\  \tau(D, C)=\omega_3,\ \tau(D, D)=\omega_4,
+$$
+that is,
+$$
+    \Omega = \{\omega_1, \omega_2, \omega_4, \omega_4\}.
+$$
+The agents $i$ and $j$ will value these outcomes according to their utility functions,
+$u_i$ and $u_j$.
+
+------- ------------------- ------------------
+i \\ j   D                   C
+D       $u_{i4}$, $u_{j4}$  $u_{i3}$, $u_{j3}$
+C       $u_{i2}$, $u_{j2}$  $u_{i1}$, $u_{j1}$
+------- ------------------- ------------------
+
+:Payoff matrix. This is a game on strategic (or normal) form.
+The extensive form would be a game tree.
+
+An interaction is said to be strictly competitive between agent $i$
+and agent $j$ when
+$$
+    \omega \succ_i \omega' \land \omega' \succ_j \omega.
+$$
+
+## Solution concepts for simple games
+
+A set of concepts for solving games on
+strategic from;
+
+1. Maximising social welfare
+2. Pareto effiency
+3. Dominant strategy
+4. Nash equilibrium
+
+Social welfare is given by the sum all all utilities
+for a particular outcome $\omega_i$,
+$$
+    sw(\omega_i) = \sum_{j\in Ag} u_j(\omega_i).
+$$
+By choosing strategies that would maximise this function we
+have an outcome that gives the highest aggregated utility
+across agents.
+
+A solution is Pareto efficient (or Pareto optimal) if 
+no improvement is possible without making someone else 
+worse off.
+
+A strategy $s$ for agent $i$ is dominant if $s$ is the best
+response to all of the opposing agent $j$'s strateiges.
+There is no geuarnatee that such a solution exists.
+
+### The Nash equilibrium
+
+If each agent has chosen a strategy, based on what they other 
+player(s) is doing, and no agent can increase its own expected 
+payoff by changing its strategy while the other players keep
+theirs unchanged, then the current set of strategy choices 
+constitutes a Nash equilibrium.
+
+The two strategies $s_i$ and $s_j$ of agents $i$ and $j$ are in
+Nash equilibrium,
+
+1. if agent $i$ plays $s_i$, player $j$ can do no better than
+playing $s_j$ and
+2. if agent $j$ plays $s_j$, player $i$ can do no better than
+playing $s_i$.
+
+$s_i$ ans $s_j$ are best repsonses to the other and no agent
+regrets its strategy choice.
+
+A Nash equilibrium is _weak_ if a change of strategy would yield
+the exact same output. If there is only one Nash "equilibrating"
+strategy, we have a _strict_ Nash equilibrium. A game can 
+have a pure-strategy or a mixed-strategy Nash equilibrium.
+A _pure strategy_ provides a complete definition of how a player will
+play a game. A _mixed strategy_ is an assignment of a probability
+to each pure strategy. This allows for a player to randomly 
+select a pure strategy. A _totally mixed_ strategy is a mixed
+strategy in which the agent assigns a strictly positive 
+probability to every pure strategy.
+
+Nash's theorem states that every game in which every agent has 
+a finite set of possibilities has a Nash equilibrium in mixed
+strategies.
+
+## Prisoner's Dilemma
+
+Two man are collectively charged with a crime and held in separate
+cells. They have no way of communicating with each other or 
+making any kind of agreement. The two men are told that if one
+of the confesses the crime and the other does not, the confessor
+will be freed, and the other will be jailed for 3 years. If
+both confess to the crime, then each will be jailed for 2
+years. If neither prisoner confesses they will be jailed for 
+1 year.
+
+---- ---- ----
+      C     D
+C    -1    -3   
+D     0    -2
+---- ---- ----
+
+:Payoff-matrix for agent $i$ in PD.
+
+This is a dilemma, because the Nash equilibrium is also the worst
+social outcome.
+
+You should also add some utilities etc!!
+
+Some important real-world examples of PD are the "Tragedy of 
+the commons", like grazing livestock, overfishing of the seas and 
+capacity bandwidth on the Internet. Nuclear weapons treaties and 
+international environmental agreements as well. Perhaps any 
+game with positive externalities?
+
+## Repeated PD
+
+Repeating PD over several rounds will increase the change
+of cooperation, because of the threat of "punishment" by 
+defecting in susequent rounds and because loss of utility
+can be amortized over several rounds.
+
+If there are infinite rounds in the repeated PD game,
+cooperation is rational due to threat of defection.
+If the number of rounds is a fixed number, it is rational 
+to defect in the last round. That in turn makes it 
+rational to defect in the second-to-last round. 
+Go figure.
+If there is a probability for playing another round it 
+is rational to cooperate if the probability of one more 
+round is large enough compared to the payoffs.
+
+
 # 9: Swarm Robotics 1
 
 ## What is swarm robotics?
