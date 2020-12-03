@@ -390,6 +390,243 @@ round is large enough compared to the payoffs.
 
 # 2: Voting
 
+## Social choice theory
+
+In a basic setting we have a set of agents,
+$$
+    Ag = \{1, 2, \dots, N\},
+$$
+where the number of agents $|Ag| = N$ is assumed to
+be finite and odd, in order to break ties. We also 
+have a set of possible outcomes,
+$$
+    \Omega = \{\omega_1, \omega_2, \dots\},
+$$
+where $|\Omega| = k$ is the number of possible
+outcomes. In a pairwise election $k=2$ and 
+in a general election $k \geq 2$.
+
+For each (voting) agent $i$ we have a preference ordering,
+$$
+    \bar{\omega}_i = (\omega_3, \omega_1, \dots, \omega_k).
+$$
+Preference aggregation is the fundamental problem in social choice theory.
+How do we combine the different agents' preference orderings in order 
+to derive a group decision? More specific, how do we generate a 
+social preference order over possible outcomes?
+
+We need a _social welfare function_ that takes the voter preferences 
+and produces a social preferences order,
+$$
+    f: \Pi(\Omega)\times\dots\Pi(\Omega)\times \to \Pi(\Omega).
+$$
+We will also use $\omega \succ^* \omega'$ to indicate that $\omega$
+is ranked over $\omega'$ in the social outcome.
+
+Sometimes, we will be concerned with slightly simpler settings, in
+which we are not concerned with obtaining an intire ordering, but just
+one of the possible candidates. We use the term _social choice function_
+for such a mapping,
+$$
+    f: \Pi(\Omega)\times\dots\Pi(\Omega)\times \to \Omega.
+$$
+
+## Plurality voting
+
+In plurality voting, every voter submits their preference order and 
+the winner is the otucome ranked first most times. This is the 
+simplest and best known voting procedure. Plurality is
+straightforward to implement and easy to understand by the voters.
+However, plurality is vulnerable to strategic manipulation
+and tactical votion. Additionally it reveals Condorcet's paradox.
+
+## Simple majority voting
+
+If we only have two outcomes to choose between, then plurality is 
+just _simple majority voting_. In this case, we simple ask voters 
+to select one of the two outcomes, and the one that gets the 
+majority of votes is the winner. Simple majority voting is 
+not very easy to manipulate. In reality there are often more
+than two possible outcomes..
+
+## Sequential majority election
+
+In a _sequential majority election_ a series of plurality elections 
+are conducted to determine a winnder. The idea is that a pair of
+outcomes will face each other in pairwise election, and the winner will
+then go on to the next election. These sequential pairwise elections 
+can be arranged into linear order of ballots, or a binary tree 
+election.
+
+Suppose we are voting over four outcomes $\omega_1$, $\omega_2$,
+$\omega_3$ and $\omega_4$. We might choose the following order
+or _agenda_ for the election,
+$$
+    \omega_2, \omega_3, \omega_4, \omega_1. 
+$$
+We could have the first election between $\omega_2$ and $\omega_3$,
+then the winner would face $\omega_4$ and so on. This is a 
+_linear order_. If we structured the election as _balanced binary tree_,
+we would have simultaneous elections, e.g. the winner
+between $\omega_2$ and $\omega_3$ would face the winner betwen $\omega_4$
+and $\omega_1$.
+
+Bear in mind that the ultimate outcome is generally sensitive to the 
+election agenda, or voting order.
+
+## Borda count
+
+For each of the possible candidate outcomes $|\Omega| = k$, we have a numerical 
+value counting the strength of opinion in favour of this candidate. If an outcome
+$\omega_j$ appears first in the preference order, we increment the count for 
+$\omega_j$ by $k - 1$, we then increment the count for the next outcome by 
+$k - 1$ and so on until the final outcome in the preference order is incremented 
+by 0. We proceed with this process until all preference orders have been 
+considered, and then simply order the outcomes $\Omega$ by their counts,
+in descending order.
+
+The Borda count (BC) for outcome $\omega_j$ is given by
+$$
+    BC_{\omega_j} = \sum_{i=1}^N k - \text{rank}\left(\bar{\omega}_i (\omega_j) \right),
+$$
+where $k = |\Omega|$ is the number of possible outcomes, $N$ is the number of voters
+and $\bar{\omega}_i$ is the social preference order of voter $i$.
+
+## Slater rule
+
+READ THROUGH THE example in the book closely (p.260).
+
+The Slater rank is used for breaking cycles in majority graphs. The Slater rank 
+for a social ordering is how many edges must be "flipped" in the cyclic majority
+graph to produce that particular social order.
+
+The Slater rule is to choose the social ordering that minimises the disagreement 
+between the majority graph and the social choice, i.e. the order with lowest
+Slater rank number.
+
+## Dictatorship
+
+A social welfare function is said to be a dictatorship if
+$$
+    f(\bar{\omega}_1, \dots \bar{\omega}_i, \dots, \bar{\omega}_N) = \bar{\omega}_i,
+$$
+where $\bar{\omega}_i$ is the preference order of voter $i$. Consequently, in dictatorship,
+the social outcome is only dependent on voter $i$.
+
+## Arrow's theorem
+
+Assuming voters have three or more distinct alternatives, there exist _no_ ranked 
+voting electoral system that can convert the ranked preferences of individuals into 
+a social preference order while at the same time also meet a set of specific 
+"desirable" criteria,
+
+1. Unrestricted domain
+2. Pareto efficiency
+3. Independence of irrelevant alternatives (IIA)
+4. Non-dictatorship
+
+The _unrestricted domain_ condition states that all preferences of all voters are allowed,
+meaning that the preference order of the voters should be complete and the social
+preference order should be deterministic.
+
+The _Pareto condition_ states that there is no other outcome that makes one voter better 
+off without making any other voter worse off, i.e. if all voters
+$\omega \succ \omega' \implies \omega \succ^* \omega'$. This condition is satisfied for
+Plurailty, Borda and dictatorship, but not for sequential majority election.
+
+IIA: The social preference between outcome $\omega \succ^* \omega'$ depends only on
+the individual preferences between $\omega \succ \omega'$. This means that the ranking
+of all the other outcomes, not changing the relative ranking of individual ranking of 
+$\omega \succ \omega'$ should affect the social ranking of $\omega \succ^* \omega'$.
+Dictatorship satisfies this criterion, but Plurality, Borda and sequential majority
+election do not.
+
+If the non-dictatorship condition is dropped as a criterion, then a dictatorship
+satisfies Arrow's theorem!
+
+## Majority graph
+
+A _majority graph_ is a directed graph constructed from voter
+preferences. An outcome is a _possible winner_ if there is some 
+agenda which would result in that outcome being the overall winner.
+An outcome is called the _Condorcet winner_ if it is the overall
+winner for every possible agenda.
+
+![Majority graph where every outcome is a possible winner](figures/maj_graph1.png){width=30em}
+
+![Majority graph where the outcome rerpesented by the node in the middle is a Condorcet winner](figures/maj_graph2.png){width=30em}
+
+Properties of a majority graph
+
+1. Completeness: For any two outcomes $\omega_i$ and $\omega_j$, we must have either
+$\omega_i$ defeat $\omega_j$ or $\omega_j$ defeat $\omega_i$.
+2. Asymmetry: If $\omega_i$ defeats $\omega_j$ then $\omega_j$ cannot defeat $\omega_i$.
+3. Irreflexivity: $\omega_i$ will never defeat itself.
+
+## Condorcet's paradox
+
+There are scenarios where no matter what outcome we choose, a
+majority of voters will be unhappy with the outcome. This 
+will depend on preference ordering of voters.
+
+Suppose we have three outcomes, $\Omega = \{\omega_1, \omega_2, \omega_3\}$,
+and three voters, $Ag = \{1,2,3\}$, with the following preference orderings,
+$$
+    \bar{\omega}_1 = (\omega_1,\omega_2,\omega_3) \iff \omega_1 \succ \omega_2 \succ \omega_3,
+$$
+$$
+    \bar{\omega}_2 = (\omega_3,\omega_1,\omega_2) \iff \omega_3 \succ \omega_1 \succ \omega_2,
+$$
+$$
+    \bar{\omega}_3 = (\omega_2,\omega_3,\omega_1) \iff \omega_1 \succ \omega_3 \succ \omega_1,
+$$
+Selecting $\omega_1$ would mean two thirds of voters would rather prefer $\omega_3$,
+and the same goes for any of the other outcomes.
+
+## Tactical voting and strategic manipulation
+
+_Tactical voting_ is a way of strategically misrepresenting ones preferences in order to 
+bring about a more preferred outcome. Suppose you are in a voting district that leans more
+towards the Convervative candidate, with Labour running third in terms of percentage
+support. You personally favour Labour, with a Liberal Democrat second and a Conservative 
+third. With a simple plurality voting, placing the Labour candidate first in your ranking
+amy well be wasted. If you instead rank the Liberal candidate first, you might be able 
+to get the Liberal candidate elected, and bring about an outcome that you prefer over the
+election of a Conservative candidate.
+
+A social welfare function is manipulable if there exists some $\hat{\omega}'_i$
+such that
+$$
+    f(\hat{\omega}_1, \dots \hat{\omega}'_i, \dots \hat{\omega}_N)
+    \succ_i
+    f(\hat{\omega}_1, \dots \hat{\omega}_i, \dots \hat{\omega}_N),
+$$
+where $\hat{\omega}_i$ is the preference order of voter $i$. This means that the 
+social otucome could be improve for some voter $i$ by unilaterally misrepresenting
+$i$'s preference order.
+
+## The Gibbard-Satterthwaite theorem
+
+Assuming voters have three or more distinct alternatives, according to 
+_the Gibbard-Satterthwaite theorem_, in general there exist _no_ voting
+protocol, except for dictatorship, that is non-manipulable. However,
+strategic manipulation might be hard to compute and uncertainties could make 
+manipulation strategies more difficult to obtain.
+
+## Second-order Copeland Scheme
+
+For a voting procedure to be "easy to compute", we mean that the function
+$f$ can be implemented by an algorithm that runs in time polynomial
+in the number of voters and candidates.
+For a voting procedure to be "easy to manipulate", we mean that if it is
+for a voter $i$ to obtain a more preferred outcome by declaring a preference 
+order $\omega'_i$ rather than its true preference $\omega_i$, then such a
+$\omega'_i$ can be comptued in polynomial time.
+Now here's a question: are there non-dictatorial voting procedures that are
+easy to compute and that satisfy the Pareto condition, but are _not_
+easy to manipulate? Yes! The _Second-order Copeland_ satisfies these 
+requirements. It also satisfies the Condorcet winner property.
+
 # 3: Cooperative Game Theory
 
 # 4: Auctions
@@ -472,7 +709,7 @@ speedup clearly levels off ($\alpha >> 0$, $\beta = 0$).
 there exists a peak speed up and for bigger system sizes the speedup decreases
 ($\alpha >> 0$, $\beta > 0$).
 
-![Gunther's Universal law of Computational Scalability](figures/gunther_usl.png)
+![Gunther's Universal law of Computational Scalability](figures/gunther_usl.png){width=30em}
 
 One can identify some "regions" of performance; super-linear, sub-linear,
 optimal and inference. As more agents are added, performance starts 
