@@ -388,6 +388,19 @@ If there is a probability for playing another round it
 is rational to cooperate if the probability of one more 
 round is large enough compared to the payoffs.
 
+# 2: Voting
+
+# 3: Cooperative Game Theory
+
+# 4: Auctions
+
+# 5: Bargaining
+
+# 6: Arguing
+
+# 7: Classical Swarm Intelligence
+
+# 8: Response Threshold
 
 # 9: Swarm Robotics 1
 
@@ -585,3 +598,6 @@ $$
 we get the expected fration for the swarm within that area at time $t$.
 The first term in the Fokker-Planck equation is a non-stochastic drift term 
 and the second term is a diffusion term.
+
+
+# 10: Swarm Robotics 2
