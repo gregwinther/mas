@@ -630,6 +630,271 @@ requirements. It also satisfies the Condorcet winner property.
 
 # 3: Cooperative Game Theory
 
+The game we have studied most is PD. The following feature of 
+PD prevents cooperation,
+
+- Binding agreements are not possible
+- Utility is given directly to individuals as a result of individual action
+
+The first feature means that agents acannot trust one another's promises. They 
+just make their decisions based solely on the information they hav about
+strategies and individual pay-offs, will try to maximise their own utility, and 
+will assume taht all other agents will be trying to do the same thing. With 
+binding agreement, PD would be no D at all.
+
+The second feature says that an individual need not be concerned with collective 
+utility; it need only to try to maximise its own utility and assume that
+everybode else will do likewise.
+
+Cooperative game theory attempts to answer two basic questions,
+
+1. Which coalition will be formed by self-interested rational agents?
+2. How is the utility divided among members in this coalition?
+
+## Formal description of a cooperative game
+
+We have a set of agents
+$$
+    Ag = \{1,2,\dots,N\},
+$$
+that can form coalitons $C$, $C'$, $C_1$, ... that
+are subsets of $Ag$, e.g. $C_1 \subset Ag$. We 
+if $C=Ag$, $C$ is the _Grand Coaliton_, and if 
+$C=\{i\}, $C$ is called a _singleton_ coalition.
+
+A cooperative game (or a coalitional game) is a pair,
+$$
+    G = \langle Ag, v \rangle,
+$$
+where $Ag$ is the set of agents and $v: 2^{Ag}$
+is the characteristic function. The characteristic function
+assigns a numerical value to all possible coalitions.
+$v(C) = k$ means that the value $k$ is assigned to coalition $C$
+and distributed among its members.
+
+The game itself is completely silent about how this utility should
+be distributed among coalition members. Coalition memebers have to 
+agree amongst themselves on how to divide the "pay cheque". The 
+origin of thee characteristic function for any given scenary is
+generally regarded as not being a concern in cooperative game theory.
+it is assumed to simple be "given".
+
+We can identify three key issues that has to be adresed with respect to 
+cooperative games. These issues are referred to as the 
+_cooperation lifecycle_.
+
+1. Coalition structure generation: which coalitions will form, or rather,
+which coalitons are _stable_.
+2. Solve the optimisation problem for each coalition. Solving the joint problem
+of the coalition, i.e. finding the best way to maximise the utility of the
+coalition itself.
+3.  Dividing the value of the solution for each coalition. The _Shapley value_
+is a "fair" distribution of utility amongst coalition members.
+
+## The core
+
+The core of a coalitional game is the set of feasible distributions of pay-off
+to members of a coalition that no subcoalition can reasonably object to.
+Formally, a coalitions $C' \subseteq Ag$ objects to an outcome
+$\mathbf{x}\langle x_1, \dots x_N \rangle$ of the coalition $C$ if there 
+exist some 
+outcome $\mathbf{x}'\langle x'_1, \dots x'_N \rangle$ in $C'$ such that 
+$x'_i > x_i$ $\forall i \in C'$. The outcomes satisfy the characteristic function
+$v$,
+$$
+    v(C) = \sum_{i\in C} x_i.
+$$
+A coalition $C$ is stable if the core is non-empty.
+
+Suddenly outcomes are written with the letter x.
+
+Example. Consider a game $G = \langle Ag, v \rangle$ where $Ag = \{1, 2\}$,
+$v(\{1\}) = 5$, $v(\{2\}) = 5$ and $v(\{1,2\}) = 20$.
+The grand coalition of $G$ is stable for several outcomes,
+$$
+    v(\{1,2\}) = \langle 5, 15 \rangle = 20,
+$$
+$$
+    v(\{1,2\}) = \langle 6, 14 \rangle = 20,
+$$
+$$
+    v(\{1,2\}) = \langle 7, 13 \rangle = 20,
+$$
+and so on. If for instance,
+$$
+    v(\{1,2\}) = \langle 19, 1 \rangle = 20 \to v(\{2\}) = 5,
+$$
+agent 2 objects.
+
+The question remains - how do we divide utility amongst coalition members?
+A good idea is to _divide surplus according to contribution_.
+
+## The Shapley value
+
+The Shapley value is based on the idea that agents should get the average
+marginal contribution it makes to a coalition, estimated over all possible
+positions that it would enter the coalition. The Shapley value is the 
+unique value that satisfies the "fairness" axioms.
+
+If $\mu_i(C)$ is the amount that $i$ adds by joining $C \subseteq Ag \setminus \{i\}$
+the _marginal contribution_ of $i$ to $C$,
+$$
+    \mu_i(C) = v(C \cup \{i\}) - v(C).
+$$
+If $\mu_i(C) = v(\{i\})$, then there is no synergy or added value from $i$
+joining $C$, since the amount $i$ adds is exactly what $i$ would earn on its
+own.
+
+The three axioms are known as,
+
+1. Symmetry: Agents that make the same contribution should get the same payoff.
+$i$ and $j$ are said to be interchangeable if $\mu_i(C) = \mu_j(C)$ for 
+$C \subseteq Ag \setminus \{i, j\}$ and $sh_i = sh_j$.
+2. Dummy player: Player who don't have any synergy with any coalition should get
+only what they can earn on their own. If
+$\mu_i = v(\{i\})$ for $C \subseteq Ag \setminus \{i\}$ then $Sh_i = v(\{i\})$.
+3. Additivity: I you combine several games, the value that a player gets should be 
+the sum of the value it gets in the individual games. A player does not gain or lose 
+by playing more than once (There is a formal representation of this on p. 275 in MAS).
+
+The Shapley value of agent $i$ is given by,
+$$
+ Sh_i = \frac{1}{|Ag|!} \sum_{o \in \prod (Ag)} \mu_i (C_i(o)),
+$$
+where $\prod (Ag)$ is the set of all possilbe orderings of coalition $C$,
+$o$ is a specific ordering of a coalition and $\mu_i$ is the marginal 
+contribution of agent $i$.
+
+Example. We have a cooperative game $G = \langle Ag, v \rangle$ where
+$Ag = \{1,2,3\}$,
+$v(\{1\}) = v(\{2\}) = v(\{3\}) = 5$, 
+$v(\{1, 2\}) = v(\{1, 3\}) = 10$,
+$v(\{2, 3\}) = 20$ and
+$v(\{1, 2, 3\}) = 25$.
+
+| Permutations of $\{1,2,3\}$ | Marginal contributions of $\{1,2,3\}$ |
+|:---------------------------:|:-------------------------------------:|
+|    $(1,2,3)$                |  $\to (5,5,15)$                       |
+|    $(1,3,2)$                |  $\to (5,15,5)$                       |
+|    $(2,1,3)$                |  $\to (5,5,15)$                       |
+|    $(2,3,1)$                |  $\to (5,5,15)$                       |
+|    $(3,1,2)$                |  $\to (5,15,5)$                       |
+|    $(3,2,1)$                |  $\to (5,15,5)$                       |
+
+
+From the table, we can compute the Shapley value to $(30,60,60)/6$.
+
+The Shapley value is hard to compute and represent for a large number of 
+players (exponential in $N$). Is it possible to represent different 
+coalition permutations in a more succint and tractable way?
+
+- Induced subgraph representation is succinct but not complete
+- Marginal contribution nets are complete and succinct
+
+## Marginal contribution net
+
+A marginal contribution net is an extension to the induced subgraph. The 
+characteristic function of a game is represented by a set of rules,
+$$
+    rs_C = \{\phi \to x \in rs| C \models \phi\},
+$$
+where $\phi \to x$ is a rule, $C$ is a coalition and we write
+$C \models \phi$ to indicate that the rule $\phi$ applies to $C$.
+The characteristic function $v_{rs}$ associated with the rule set
+$rs$ is
+$$
+    v_{rs}(C) = \sum_{\phi \to x \in rs_{C}} x,
+$$
+where $\phi \to x$ is a rule in the rule set $rs_C$.
+
+Look at this in book and/or slides!
+
+## Simple games
+
+A simple coaltional game is one in which every coalition gets a value of either 1
+("winning") or 0 ("losing"). Simple games are important because they model
+yes/no voting systems in which a proposal is pitted against the status quo.
+Formally we have a pair,
+$$
+    Y = \langle Ag, W \rangle,
+$$
+where $Ag = \{1, 2, \dots, N\}$ is a set of $N$ agents or voters
+and $W \subseteq 2^{Ag}$ is the set of winning coalitions such that 
+$v(W) = 1$ and $v(C \notin W) = 0$.
+
+Some properties of simple games:
+
+1. Non-triviality. There are some winning coalitions, but not all coalitions are 
+winning. Formally $\emptyset \subset W subset 2^{Ag}$.
+2. Monotonicity. If $C$ wins, then every superset of $C$ also wins. Formally
+if $C_1 \subseteq C_2$ and $C_1 \in W$ then $C_2 \in W$.
+3. Zero-sum. If a coaltion $C$ wins, then agents outside $C$ do not win. Formally
+if $C \in W$ then $Ag \setminus C \notin W$.
+4. Empty coalition loses. $\emptyset \notin W$
+5. Grand coalition wins. $Ag \in W$.
+
+Explicitly listing all coalitions will be exponential in number of players.
+
+Weighted voting games are a natural extension of simple games possibly
+reducing number of players in these games.
+
+## Weighted voting games
+
+Weighted voting games is a more concise way of representing many simple games.
+For instance, instead of representing 100 US senators explicitly, we represent
+the different "blocks" of voters and evaluate those against the criteria of
+winning, called the quota. This greatly reduces the number
+of players/voters.
+
+For each agent $i \in Ag$ we define a weight $w_i$, and we define an overall
+_quota_ $q$. A coalition $C$ is then winning if the sum of their weights
+exceeds the quota,
+$$
+    v(C) = \begin{cases} 1 \text{ if } \sum_{i \in C } w_i > q \\ 0 \end{cases},
+$$
+where $c(C)$ is the characteristic function of coaltion $C$. In a simple majority 
+voting process $q = \frac{|Ag| + 1}{2}$.
+
+The weighted voting game can be written on the form
+$$
+    \langle q; w_1, w_2, \dots w_N \rangle.
+$$
+
+The Shapley value calculates the power of voters in the game. How?
+It is NP-hard.
+
+The Core is much easier to compute. How?
+
+A special version of exists called the $k$-weighted voting game.
+
+## Coalitional structure formation
+
+Central planner forms a coalition
+
+1. All nodes owned by a single designer
+2. Maximising social welfare.
+
+The problem is to find the coalition structure that maximises the aggregated outcome.
+This is a search through a partition of the overall set of agents $Ag$ into mutually
+disjoint coalitions.
+
+Example using $Ag = \{1, 2, 3\}$.
+The possible coalitions are
+$$
+    \{1\}, \{2\}, \{3\}, \{1,2\}, \{1,3\}, \{2,3\}, \{1,2,3\},
+$$
+and possible coalition structures are,
+$$
+    \{1,2,3\}, \{1\}\{2,3\}, \{2\}\{1,3\}, \{3\}\{1,2\}, \{1\}\{2\}\{3\}.
+$$
+
+The social choice is
+$$
+    CS^* = \arg \max_{CS \in \text{part of } Ag} V(CS),
+$$
+where $V(CS) = \sum_{C \in CS} v(C)$ is the outcome of $CS$. The problem is that the
+number of coalition structures is exponentially more than coalitons over $Ag$.
+
 # 4: Auctions
 
 # 5: Bargaining
