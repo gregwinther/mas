@@ -538,7 +538,7 @@ Plurailty, Borda and dictatorship, but not for sequential majority election.
 IIA: The social preference between outcome $\omega \succ^* \omega'$ depends only on
 the individual preferences between $\omega \succ \omega'$. This means that the ranking
 of all the other outcomes, not changing the relative ranking of individual ranking of 
-$\omega \succ \omega'$ should affect the social ranking of $\omega \succ^* \omega'$.
+$\omega$ and $\omega'$, should _not_ affect the social ranking of $\omega$ and $\omega'$.
 Dictatorship satisfies this criterion, but Plurality, Borda and sequential majority
 election do not.
 
